@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Create Agent account</title>
+	</head>
+	<body>
+        
+    
+        <h1>Create an Agent Account</h1>
+
+        <!-- sign up form -->
+
+        <form method = "POST" action ="">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.firstName.label }}
+                {{ form.firstName }}<br><br>
+                {{ form.lastName.label }}
+                {{ form.lastName }}<br><br>
+                {{ form.username.label }}
+                {{ form.username }}<br><br>
+                {{ form.email.label }}
+                {{ form.email }}<br><br>
+                {{ form.password.label }}
+                {{ form.password }}<br><br>
+                {{ form.confPassword.label }}
+                {{ form.confPassword }}<br><br>
+                {{ form.agentId.label }}
+                {{ form.agentId }}<br><br>
+                {{ form.company.label }}
+                {{ form.company }}<br><br>
+                {{ form.phoneNumber.label}}
+                {{ form.phoneNumber}}<br><br>
+                <!-- {{ form.submit.label }} -->
+                {{ form.submit }}<br><br>
+
+            </div>
+
+        </form>
+        
+
+
+
+<!-- firstName = StringField('First Name', validators = [DataRequired()])
+    lastName = StringField('Last Name', validators= [DataRequired()])
+    username = StringField('Username', validators=[DataRequired(),Length(min=5, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8, message='Password must be at least 8 characters')])
+    confPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    agentId = IntegerField('Agent ID Number', validators=[DataRequired()])
+    company = StringField('Company', validators=[DataRequired()])
+    phoneNumber = IntegerField('Phone Number', validators=[DataRequired()])    
+    submit = SubmitField('Sign Up') -->
+
+        <div>
+            <p class="text-muted">
+                If you already have an account, sign in <a href="/login">here</a>
+            </p>
+        </div>
+        <br><br>
+        <a href="/">Home</a>
+
+
+	</body>
+</html>
