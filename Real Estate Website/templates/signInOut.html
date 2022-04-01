@@ -1,22 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Homes For Sale{% endblock %}
 {% block content %}
-<h1>Sign In / Sign Out</h1>
-<a href="{{url_for('accountCreation')}}">Don't have an account? Create Account</a>
-<form action="#" method="post">
-	<div class="mb-3">
-	  <label for="exampleInputEmail1" class="form-label">Email address</label>
-	  <input type="email" email="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-	  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-	</div>
-	<div class="mb-3">
-	  <label for="exampleInputPassword1" class="form-label">Password</label>
-	  <input type="password" class="form-control" id="exampleInputPassword1">
-	</div>
-	<div class="mb-3 form-check">
-	  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-	  <label class="form-check-label" for="exampleCheck1">Check me out</label>
-	</div>
-	<button type="submit" value="submit" class="btn btn-primary">Submit</button>
-</form>
+
+
+<div class="custom-container" style="width:50%;margin-left:auto;margin-right:auto;">
+	<h1>Sign In / Sign Out</h1>
+	<a href="{{url_for('accountCreation')}}">Don't have an account? Create Account</a>
+	<form action="#" method="post">
+		<div class="mb-3">
+		<label for="exampleInputEmail1" class="form-label" name="nm">Email address</label>
+		<input type="email" email="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+		<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+		</div>
+		<div class="mb-3">
+		<label for="exampleInputPassword1" class="form-label">Password</label>
+		<input type="password" class="form-control" id="exampleInputPassword1">
+		</div>
+		<div class="mb-3 form-check">
+		<input type="checkbox" class="form-check-input" id="exampleCheck1">
+		<label class="form-check-label" for="exampleCheck1">Check me out</label>
+		</div>
+		<div class="d-grid gap-4 d-md-flex ">
+			<button type="submit" value="submit" class="btn btn-primary">Sign in</button>
+			<button type="submit" value="submit" class="btn btn-primary">Sign Out</button>
+		</div>
+	</form>
+</div>
 {% endblock %}

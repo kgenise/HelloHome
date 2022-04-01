@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, redirect, url_for, render_template, flash
+from flask import request, redirect, url_for, render_template, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
 
 @app.route("/")
 def home():
-    return flask.render_template("home.html")
+    return render_template("home.html")
 
 @app.route("/account")
 def account():
@@ -24,35 +24,38 @@ def account():
 
 @app.route("/accountCreation")
 def accountCreation():
-    return flask.render_template("accountCreation.html")
+    return render_template("accountCreation.html")
 
 @app.route("/edit")
 def edit():
-    return flask.render_template("edit.html")
+    return render_template("edit.html")
 
 @app.route("/faq")
 def faq():
-    return flask.render_template("faq.html")
+    return render_template("faq.html")
 
 @app.route("/listing")
 def listing():
-    return flask.render_template("listing.html")
+    return render_template("listing.html")
 
 @app.route("/signInOut", methods=["POST","GET"])
 def signInOut():
     if request.method == "POST":
+        user = request.form["nm"]
+        session["user"] = user
         flash("Logged in!")
+
         return redirect(url_for('home'))
     else:
-        return flask.render_template("signInOut.html")
+        return render_template("signInOut.html")
 
 @app.route("/viewing")
 def view():
-    return flask.render_template("viewing.html")
+    return render_template("viewing.html")
 
 @app.route("/post")
 def post():
-    return flask.render_template("post.html")
+    return render_template("post.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
