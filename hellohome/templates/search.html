@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid bg-3 text-center">    
+	<div class="row">
+		<!-- 1. Search bar -->
+			<input type="text" placeholder="Enter a zipcode" style="width: 30%;">
+        
+        <!-- 2. Price -->
+			<label for="cars">Type:</label>
+			<select name="saletype" id="cars">
+				<option value="forsale">For Sale</option>
+				<option value="forrent">For Rent</option>
+			</select>
+
+		<!-- 3. Price -->
+			<label for="price">Price:</label>
+			<select name="price" id="price">
+				<option value="1">$10,000+</option>
+				<option value="2">$25,000+</option>
+				<option value="3">$50,000+</option>
+				<option value="4">$75,000+</option>
+				<option value="5">$100,000+</option>
+				<option value="6">$120,000+</option>
+				<option value="7">$150,000+</option>
+				<option value="8">$175,000+</option>
+				<option value="9">$200,000+</option>
+				<option value="10">$300,000+</option>
+				<option value="11">$400,000+</option>
+			</select>
+
+		<!-- 4. Property Type -->
+			<label for="propertytype">Property Type:</label>
+			<select name="propertytype" id="propertytype">
+				<option value="1">Single Family</option>
+				<option value="2">Townhouse</option>
+				<option value="3">Multifamily</option>
+				<option value="4">Condo</option>
+			</select>
+
+		<!-- 5. Beds -->
+			<label for="beds">Beds:</label>
+			<select name="beds" id="beds">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="5">4+</option>
+            </select>
+
+		<!-- 6. Baths -->
+			<label for="baths">Baths:</label>
+			<select name="baths" id="baths">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="5">4+</option>
+			</select>
+
+			<button type="submit" name="submit-search" class="search_btn" >Search</button>
+	</div>
+</div>
+
+
+<div class="container-fluid bg-3 text-center"> 
+	<div class="row" style="border:1px black solid">
+		<!-- Picture on left -->
+		<div class="col-sm-3"> 
+
+			<a href="{{ url_for('home_id1') }}">
+				<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+			</a>
+		</div>
+		<!-- Details on right -->
+		<div class="col-sm"> 
+			<p id="home_type">For Sale</p>
+			<p id="home_price">$200,000</p>
+			<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+			<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+			<p id="home_realtycompany">Keller Williams</p>
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock content %}

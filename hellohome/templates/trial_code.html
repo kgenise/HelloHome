@@ -1,0 +1,163 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+
+        <a class="navbar-brand mr-4"  href="/">
+            <img src="{{url_for('static', filename='newlogo.jpg')}}" align="middle" />
+        </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="/">Home</a>
+                 <a class="nav-item nav-link" href="/about">About</a>
+            </div> 
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/login">Login</a>
+                <a class="nav-item nav-link" href="/register">Register</a>
+            </div>
+          </div>
+    </div>
+  </nav>
+
+
+  <!-- More Filters -->
+  <div class="col-sm-2"> 
+    <label for="morefilters">More Filters:</label>
+    <select name="morefilters" id="morefilters">
+        <option value="1">Coming Soon</option>
+</div>
+
+
+
+
+  .navbar-brand img {
+    width: 150px;
+    margin-top: 5px;
+    margin-left: 20px;
+  }
+
+  .bg {
+    /* The image used */
+    background-image: url("bg_blue_house.jpg");
+    opacity: 0.6;
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
+
+  <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+
+  #backgroundimage {
+    background-image: url("bg_home.jpg");
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: repeat;
+    color: #333333;
+    opacity: 0.5;
+}
+
+<div class="container-fluid bg-3 text-center">    
+    <div class="row">
+      <div class="col-sm-3">
+        <p>Some text..</p>
+        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-3"> 
+        <p>Some text..</p>
+        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-3"> 
+        <p>Some text..</p>
+        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-3">
+        <p>Some text..</p>
+        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+    </div>
+  </div><br><br>
+
+
+
+  <div class="container-fluid bg-3 text-center">    
+	<div class="row">
+		<!-- 1. Search bar -->
+		<div class="col-sm-4" style="border: none;">
+			<input type="text" placeholder="Enter a zipcode">
+		</div>
+		<!-- 2. Sale Type -->
+		<div class="col-sm-2"> 
+			<label for="cars">Type:</label>
+			<select name="saletype" id="cars">
+				<option value="forsale">For Sale</option>
+				<option value="forrent">For Rent</option>
+			</select>
+		</div>
+		<!-- 3. Price -->
+		<div class="col-sm-2"> 
+			<label for="price">Price:</label>
+			<select name="price" id="price">
+				<option value="1">$10,000+</option>
+				<option value="2">$25,000+</option>
+				<option value="3">$50,000+</option>
+				<option value="4">$75,000+</option>
+				<option value="5">$100,000+</option>
+				<option value="6">$120,000+</option>
+				<option value="7">$150,000+</option>
+				<option value="8">$175,000+</option>
+				<option value="9">$200,000+</option>
+				<option value="10">$300,000+</option>
+				<option value="11">$400,000+</option>
+			</select>
+		</div>
+		<!-- Property Type -->
+		<div class="col-sm-2"> 
+			<label for="propertytype">Property Type:</label>
+			<select name="propertytype" id="propertytype">
+				<option value="1">Single Family</option>
+				<option value="2">Townhouse</option>
+				<option value="3">Multifamily</option>
+				<option value="4">Condo</option>
+			</select>
+		</div>
+		<!-- Beds -->
+		<div class="col-sm-1"> 
+			<label for="beds">Beds:</label>
+			<select name="beds" id="beds">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="4">4+</option>
+			</select>
+		</div>
+		<!-- Baths -->
+		<div class="col-sm-1"> 
+			<label for="baths">Baths:</label>
+			<select name="baths" id="baths">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="4">4+</option>
+			</select>
+		</div>
+	</div>
