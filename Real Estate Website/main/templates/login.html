@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Sign In</title>
+	</head>
+	<body>
+        
+		<h3>Log In</h3>
+		<br><br>
+
+		<form method = "POST" action ="">
+            {{ form.hidden_tag() }}
+            <div>
+                
+                {{ form.email.label }}
+                {{ form.email }}<br><br>
+                {{ form.password.label }}
+                {{ form.password }}<br><br>
+                {{ form.rememberLogin.label }}
+                {{ form.rememberLogin }}<br><br>
+                <!-- {{ form.submit.label }} -->
+                {{ form.submit }}<br><br>
+
+            </div>
+
+        </form>
+
+		<p>Don't have an account? Create one <a href="/signup">here</a></p>
+
+
+        <a href="/">Home</a>
+
+	</body>
+</html>
