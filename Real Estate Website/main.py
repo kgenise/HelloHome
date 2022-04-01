@@ -1,8 +1,17 @@
-import flask
+from flask import Flask
+from flask import request, redirect, url_for, render_template, flash
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
-app = flask.Flask(__name__)
-
+app = Flask(__name__)
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY']='12345'
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
 
 
 @app.route("/")
@@ -12,6 +21,10 @@ def home():
 @app.route("/account")
 def account():
     return flask.render_template("account.html") 
+
+@app.route("/accountCreation")
+def accountCreation():
+    return flask.render_template("accountCreation.html")
 
 @app.route("/edit")
 def edit():
@@ -25,14 +38,21 @@ def faq():
 def listing():
     return flask.render_template("listing.html")
 
-@app.route("/signInOut")
+@app.route("/signInOut", methods=["POST","GET"])
 def signInOut():
-    return flask.render_template("signInOut.html")
+    if request.method == "POST":
+        flash("Logged in!")
+        return redirect(url_for('home'))
+    else:
+        return flask.render_template("signInOut.html")
 
 @app.route("/viewing")
 def view():
     return flask.render_template("viewing.html")
 
+@app.route("/post")
+def post():
+    return flask.render_template("post.html")
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

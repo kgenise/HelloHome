@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Home</title>
-	</head>
-	<body>
-        
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+        {% block content %}
         <h1>Home</h1>
 
         <div>
             <a href="/account">View Account</a>
-            <a href="/createAccount">Create Account</a>
+            <a href="/accountCreation">Create Account</a>
             <a href="/editAccount">Edit Account</a>
             <a href="/edit">Edit Listing</a>
             <a href="/post">Post Listing</a>
@@ -20,8 +16,6 @@
             
 
         </div>
+        {% endblock %}
 
 
-
-	</body>
-</html>
