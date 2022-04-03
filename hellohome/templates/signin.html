@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+	<ul class="nav nav-tabs nav-fill nav-justified">
+		<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+			<a class="nav-link" href={{ url_for('signin') }}>Sign In</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href={{ url_for('register') }}>Register</a>
+		</li>
+	</ul>
+</div>
+
+
+<div class="custom-container " style="width:50%;margin-left:auto;margin-right:auto">
+	<form action="#" method="post">
+		<!-- Email Address -->
+		<div class="mb-3">
+			<label for="exampleInputEmail1" class="form-label" name="nm">Email address:</label>
+			<input type="email" email="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+		</div>
+		<!-- Password -->
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">Password:</label>
+			<input type="password" class="form-control" id="exampleInputPassword1">
+		</div>
+		<!-- Submit Button -->
+		<div class="d-flex justify-content-center">
+			<button type="button" class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body" style="background-color:#04c4d9;color: white !important;">Sign In</button>
+		</div>
+		<!-- Registration Link -->
+		<div class="d-grid gap-4 d-md-flex ">
+			<p>Not a member? <a href="{{url_for('register')}}"> Register</a></p>
+		</div>
+
+		
+	</form>
+</div>
+
+{% endblock content %}

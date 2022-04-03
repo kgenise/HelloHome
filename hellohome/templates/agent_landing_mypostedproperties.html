@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h6>agent_landing_mypostedproperties</h6>
+	<h2>Welcome Agent Ayesha!</h2>
+
+	<div class="container">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+                <a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_postaproperty') }}>Post a Property</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+            </li>
+        </ul>
+    </div>
+
+	<h3>&#10064; My Posted Properties</h3>
+
+	<!-- Display on Page -->
+<div class="container-fluid bg-3 text-center"> 
+	<div class="row" style="border:1px black solid">
+		<!-- Picture on left -->
+		<div class="col-sm-3"> 
+			<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+			<a data-toggle="modal" data-target="#staticBackdrop">
+				<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+			</a>
+		</div>
+		<!-- Details in middle -->
+		<div class="col-sm"> 
+			<p id="home_type">For Sale</p>
+			<p id="home_price">$200,000</p>
+			<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+			<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+			<p id="home_realtycompany">Keller Williams</p>
+		</div>
+		<!-- Delete / Edit Buttons on Right -->
+
+		<div class="col-sm">
+			<!-- Edit Property -->
+			<button style="background-color:#04c4d9;color: white !important; border:1px black solid" data-toggle="modal" data-target="#editModal">Edit Property</button> 
+			
+			<!-- Edit Button's MODAL -->
+			<div class="modal" id="editModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+				  	<div class="modal-content">
+						<div class="modal-header">
+					  		<h5 class="modal-title">Edit Property: [X]</h5>
+					  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+					  		</button>
+						</div>
+						<div class="modal-body">
+					  		<p>Are you sure you want to edit the property?</p>
+							  <!-- EDIT FIELDS START -->
+
+							  <form action="/properties" method="POST">
+								<label for="sale_type">Buy or rent?:</label>
+								<input type="text" id="sale_type" name="sale_type"><br>
+								<label for="property_type">Property type?:</label>
+								<input type="text" id="property_type" name="property_type"><br>
+								<label for="price">Price?: $</label>
+								<input type="text" id="price" name="price"><br>
+								<label for="num_bed">Number of beds?:</label>
+								<input type="text" id="num_bed" name="num_bed"><br>
+								<label for="num_bath">Number of baths?:</label>
+								<input type="text" id="num_bath" name="num_bath"><br>
+								<label for="building_size">Building size?:</label>
+								<input type="text" id="building_size" name="building_size"><br>
+								<label for="land_size">Land size?:</label>
+								<input type="text" id="land_size" name="land_size"><br>
+								<label for="street">Street?:</label>
+								<input type="text" id="street" name="street"><br>
+								<label for="city">City?:</label>
+								<input type="text" id="city" name="city"><br>
+								<label for="state">State?:</label>
+								<input type="text" id="state" name="state"><br>
+								<label for="zip">Zip?:</label>
+								<input type="text" id="zip" name="zip"><br><br>>
+							</form>
+							  <!-- EDIT FIELDS END -->
+						</div>
+						<div class="modal-footer">
+					  		<button type="button" class="btn btn-primary">Update</button>
+							<!-- IF PROPERTY IS UPDATED, MUST REFRESH PAGE TO AGENT'S PROPERTY LISTINGS PAGE with NEW info-->
+
+					  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						</div>
+				  	</div>
+				</div>
+			</div>
+
+			<!-- Delete Property -->
+			<button style="background-color:#04c4d9;color: white !important; border:1px black solid" data-toggle="modal" data-target="#deleteModal">Delete Property</button> 
+
+			<!-- Delete Button's MODAL -->
+			<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+				  	<div class="modal-content">
+						<div class="modal-header">
+					  		<h5 class="modal-title">Delete Property: [X]</h5>
+					  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+					  		</button>
+						</div>
+						<div class="modal-body">
+					  		<p>Are you sure you want to delete property [X]?</p>
+						</div>
+						<div class="modal-footer">
+					  		<button type="button" class="btn btn-primary">Delete</button>
+							<!-- IF PROPERTY IS DELETED, MUST REFRESH PAGE TO AGENT'S PROPERTY LISTINGS PAGE -->
+
+					  		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						</div>
+				  	</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+  
+
+
+
+
+{% endblock content %}

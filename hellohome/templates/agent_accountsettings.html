@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h6>agent_accountsettings</h6>
+    <h2>Welcome Agent Ayesha!</h2>
+
+	<div class="container">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_postaproperty') }}>Post a Property</a>
+            </li>
+			<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+                <a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+            </li>
+        </ul>
+    </div>
+
+	<h3>&#9881;&#65039; Account Settings</h3>
+
+    <!-- COPIED FROM OUR REGISTER PAGE!!! -->
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <form>
+                                <!-- First Name -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="accountFname">First Name:</label><input type="text" id="accountFname" class="form-control form-control-lg" />
+                                </div>
+                                
+                                <!-- Last Name -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="accountLname">Last Name:</label>
+                                    <input type="text" id="accountLname" class="form-control form-control-lg" />
+                                </div>
+    
+                                <!-- Email Address -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="accountEmail">Email:</label>
+                                    <input type="email" id="accountEmail" class="form-control form-control-lg" />
+                                </div>
+                                
+                                <!-- Password -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="accountPassword" >Password:</label>
+                                    <input type="password" id="accountPassword" class="form-control form-control-lg" />
+                                </div>
+    
+                                <!-- Repeat Password -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="accountPasswordRepeat">Confirm password:</label>
+                                    <input type="password" id="accountPasswordRepeat"  class="form-control form-control-lg" />
+                                </div>
+
+                                <!-- Phone Number -->
+						        <div class="form-outline mb-4">
+						            <label class="form-label" for="accountPhoneNumber">Phone Number:</label>
+                                    <input type="text" id="accountPhoneNumber" class="form-control form-control-lg" />
+						        </div>
+                            
+                                <!-- Realty Company -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="accountRealtyCompany">Realty Company:</label>
+                                    <input type="text" id="accountRealtyCompany" class="form-control form-control-lg" />
+                                </div>
+
+                                <!-- Update Button -->
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body" style="background-color:#04c4d9;color: white !important;">Update</button>
+                                </div>
+                            </form>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
