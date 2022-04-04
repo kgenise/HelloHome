@@ -1,66 +1,74 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container-fluid bg-3 text-center">    
+<form class="container-fluid bg-3 text-center" method="GET">    
 	<div class="row">
 		<!-- 1. Search bar -->
-			<input type="text" placeholder="Enter a zipcode" style="width: 30%;">
+			<input name ="search" type="search" placeholder="Enter a zipcode" style="width: 30%;">
         
         <!-- 2. Price -->
 			<label for="cars">Type:</label>
 			<select name="saletype" id="cars">
-				<option value="forsale">For Sale</option>
-				<option value="forrent">For Rent</option>
+				<option value="none" selected disabled hidden>Sale Type</option>
+				<option value="sale">For Sale</option>
+				<option value="rent">For Rent</option>
 			</select>
 
 		<!-- 3. Price -->
 			<label for="price">Price:</label>
 			<select name="price" id="price">
-				<option value="1">$10,000+</option>
-				<option value="2">$25,000+</option>
-				<option value="3">$50,000+</option>
-				<option value="4">$75,000+</option>
-				<option value="5">$100,000+</option>
-				<option value="6">$120,000+</option>
-				<option value="7">$150,000+</option>
-				<option value="8">$175,000+</option>
-				<option value="9">$200,000+</option>
-				<option value="10">$300,000+</option>
-				<option value="11">$400,000+</option>
+				<option value="none" selected disabled hidden>Price</option>
+				<option value=10000>$10,000+</option>
+				<option value=25000>$25,000+</option>
+				<option value=50000>$50,000+</option>
+				<option value=75000>$75,000+</option>
+				<option value=100000>$100,000+</option>
+				<option value=120000>$120,000+</option>
+				<option value=150000>$150,000+</option>
+				<option value=175000>$175,000+</option>
+				<option value=200000>$200,000+</option>
+				<option value=3000000>$300,000+</option>
+				<option value=400000>$400,000+</option>
 			</select>
+
 
 		<!-- 4. Property Type -->
-			<label for="propertytype">Property Type:</label>
-			<select name="propertytype" id="propertytype">
-				<option value="1">Single Family</option>
-				<option value="2">Townhouse</option>
-				<option value="3">Multifamily</option>
-				<option value="4">Condo</option>
-			</select>
+		<label for="propertytype">Property Type:</label>
+		<select name="propertytype" id="propertytype">
+			<option value="none" selected disabled hidden>Property Type</option>
+			<option value="Single Family">Single Family</option>
+			<option value="Townhouse">Townhouse</option>
+			<option value="Multifamily">Multifamily</option>
+			<option value="Condo">Condo</option>
+			<option value="house">House</option>
+			<option value="apartment">Apartment</option>
+		</select>
 
 		<!-- 5. Beds -->
-			<label for="beds">Beds:</label>
-			<select name="beds" id="beds">
-				<option value="1">Any</option>
-				<option value="2">1+</option>
-				<option value="3">2+</option>
-				<option value="4">3+</option>
-				<option value="5">4+</option>
-            </select>
+		<label for="beds">Beds:</label>
+		<select name="beds" id="beds">
+			<option value="none" selected disabled hidden>Any</option>
+			<option value="1">1+</option>
+			<option value="2">2+</option>
+			<option value="3">3+</option>
+			<option value="4">4+</option>
+			<option value="5">4+</option>
+		</select>
 
 		<!-- 6. Baths -->
-			<label for="baths">Baths:</label>
-			<select name="baths" id="baths">
-				<option value="1">Any</option>
-				<option value="2">1+</option>
-				<option value="3">2+</option>
-				<option value="4">3+</option>
-				<option value="5">4+</option>
-			</select>
+		<label for="baths">Baths:</label>
+		<select name="baths" id="baths">
+			<option value="none" selected disabled hidden>Any</option>
+			<option value="1">1+</option>
+			<option value="2">2+</option>
+			<option value="3">3+</option>
+			<option value="4">4+</option>
+			<option value="5">4+</option>
+		</select>
 
 			<button type="submit" name="submit-search" class="search_btn" >Search</button>
 	</div>
-</div>
+</form>
 
 <!-- Display on Page -->
 <div class="container-fluid bg-3 text-center"> 

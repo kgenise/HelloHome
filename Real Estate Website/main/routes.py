@@ -123,6 +123,35 @@ def login():
 @app.route("/viewing")
 def view():
     properties = Properties.query.all()
+
+    search = request.args.get('search')
+    
+    if search: 
+        properties = Properties.query.filter(Properties.zip.contains(search))
+    else:
+        properties = Properties.query.all()
+
+    price = request.args.get('price')
+    propertytype = request.args.get('propertytype')
+    saletype = request.args.get('saletype') 
+    beds = request.args.get('beds')
+    baths = request.args.get('baths')
+    
+    if (saletype != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype)
+    
+    if (propertytype != None) :
+        properties = Properties.query.filter(Properties.property_type == propertytype)
+    
+    if (beds != None) :
+        properties = Properties.query.filter(Properties.num_bed > beds)
+    
+    if (baths != None) :
+        properties = Properties.query.filter(Properties.num_bath > baths)
+
+    if (price != None):
+        properties = Properties.query.filter(Properties.price > price)
+
     
     return render_template("viewing.html", properties = properties)
 
