@@ -1,0 +1,185 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid bg-3 text-center">    
+	<div class="row">
+		<!-- 1. Search bar -->
+			<input type="text" placeholder="Enter a zipcode" style="width: 30%;">
+        
+        <!-- 2. Price -->
+			<label for="cars">Type:</label>
+			<select name="saletype" id="cars">
+				<option value="forsale">For Sale</option>
+				<option value="forrent">For Rent</option>
+			</select>
+
+		<!-- 3. Price -->
+			<label for="price">Price:</label>
+			<select name="price" id="price">
+				<option value="1">$10,000+</option>
+				<option value="2">$25,000+</option>
+				<option value="3">$50,000+</option>
+				<option value="4">$75,000+</option>
+				<option value="5">$100,000+</option>
+				<option value="6">$120,000+</option>
+				<option value="7">$150,000+</option>
+				<option value="8">$175,000+</option>
+				<option value="9">$200,000+</option>
+				<option value="10">$300,000+</option>
+				<option value="11">$400,000+</option>
+			</select>
+
+		<!-- 4. Property Type -->
+			<label for="propertytype">Property Type:</label>
+			<select name="propertytype" id="propertytype">
+				<option value="1">Single Family</option>
+				<option value="2">Townhouse</option>
+				<option value="3">Multifamily</option>
+				<option value="4">Condo</option>
+			</select>
+
+		<!-- 5. Beds -->
+			<label for="beds">Beds:</label>
+			<select name="beds" id="beds">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="5">4+</option>
+            </select>
+
+		<!-- 6. Baths -->
+			<label for="baths">Baths:</label>
+			<select name="baths" id="baths">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="5">4+</option>
+			</select>
+
+			<button type="submit" name="submit-search" class="search_btn" >Search</button>
+	</div>
+</div>
+
+<!-- Display on Page -->
+<div class="container-fluid bg-3 text-center"> 
+	<div class="row" style="border:1px black solid">
+		<!-- Picture on left -->
+		<div class="col-sm-3"> 
+			<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+			<a data-toggle="modal" data-target="#staticBackdrop">
+				<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+			</a>
+		</div>
+		<!-- Details on right -->
+		<div class="col-sm"> 
+			<p id="home_type">For Sale</p>
+			<p id="home_price">$200,000</p>
+			<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+			<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+			<p id="home_realtycompany">Keller Williams</p>
+		</div>
+	</div>
+</div>
+  
+<!-- Modal -->
+<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal CONTENT -->
+	  	<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<!-- MODIFY HEADER -->
+				<h5 class="modal-title" id="staticBackdropLabel">8018 Pine Hill Drive, Tampa FL 33617<h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<div class="container-fluid">
+					<!-- Picture -->
+					<div class="row">
+						<div class="col-md-9 mx-auto">
+							<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+						</div>
+					</div>
+					<!-- Main Details + Contact Us -->
+					<div class="row">
+						<div class="col-md-9 ml-auto">
+							<p id="home_type">For Sale</p>
+							<p id="home_price">$200,000</p>
+							<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+							<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+							<p id="home_realtycompany">Keller Williams</p>
+					  	</div>
+					  	<div class="col-md-3 mx-auto">
+							<h5>Contact Us</h5>
+							<button class="signin_btn">
+								<a class="nav-link" href="/login">
+									Sign In
+								</a>
+							</button>
+					  	</div>
+					</div>
+					<!-- Description -->
+					<div class="row">
+						<div class="col-md ml-auto">
+							<p>Maecenas volutpat, odio eget imperdiet faucibus, dui diam placerat turpis, non semper leo quam fringilla orci. Etiam vitae fringilla leo. Cras mollis ex vel mauris ullamcorper porta. Proin est felis, venenatis sed ex sit amet, luctus dictum tellus. Etiam porttitor, felis facilisis feugiat egestas, mi ipsum varius tortor, vel varius lorem nulla non tortor. Nulla vel ligula vehicula, posuere erat imperdiet, consequat ante. Sed vestibulum, elit non interdum tempor, diam justo venenatis arcu, eget ullamcorper elit ex sed risus. Ut sagittis tincidunt lectus, id tempor felis auctor eu. Donec feugiat vehicula risus ut tristique.</p>
+						</div>
+					</div>
+					<!-- Property Details > General -->
+					<div class="row">
+						<h5>General</h5>
+						<div class="col-md ml-auto">
+							<p>MLS/home ID:</p>
+							<p>Property Type:</p>
+							<p>hellohome Views:</p>
+							<p>Year Built:</p>
+							<p>Lot Desc:</p>
+							<p>Stories:</p>
+							<p>View:</p>
+							<p>HOA:</p>
+						</div>
+					</div>
+					<!-- Property Details > Exterior -->
+					<div class="row">
+						<h5>Exterior</h5>
+						<div class="col-md ml-auto">
+							<p>Roof:</p>
+							<p>Construction Materials:</p>
+							<p>Road Surface Type:</p>
+							<p>Foundation:</p>
+							<p>Fencing:</p>
+							<p>Parking:</p>
+							<p>Pool:</p>
+							<p>Spa:</p>
+							<p>Sprinklers:</p>
+							<p>Sewer:</p>
+						</div>
+					</div>
+					<!-- Property Details > Interior -->
+					<div class="row">
+						<h5>Interior</h5>
+						<div class="col-md ml-auto">
+							<p>Applicances Included:</p>
+							<p>Flooring:</p>
+							<p>Fireplace:</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal Footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+	  </div>
+	</div>
+  </div>
+
+
+
+
+{% endblock content %}

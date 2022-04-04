@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            
+
+        
+    <h1>Create Listing</h1>
+
+    <form method = "POST" action ="">
+      {{ form.hidden_tag() }}
+      <div>
+          
+          {{ form.saleType.label }}
+          {{ form.saleType }}<br><br>
+          {{ form.propertyType.label }}
+          {{ form.propertyType }}<br><br>
+          {{ form.price.label }}
+          {{ form.price }}<br><br>
+          {{ form.bedrooms.label }}
+          {{ form.bedrooms }}<br><br>
+          {{ form.baths.label }}
+          {{ form.baths }}<br><br>
+          {{ form.buildingSize.label }}
+          {{ form.buildingSize }}<br><br>
+          {{ form.landSize.label }}
+          {{ form.landSize }}<br><br>
+          {{ form.street.label}}
+          {{ form.street }}<br><br>
+          {{ form.city.label }}
+          {{ form.city }}<br><br>
+          {{ form.state.label }}
+          {{ form.state }}<br><br>
+          {{ form.zip.label }}
+          {{ form.zip }}<br><br>
+          {{ form.userId.label}}
+          {{ form.userId }}<br><br>
+          
+          {{ form.submit }}<br><br>
+
+      </div>
+
+  </form>
+
+        <!-- street = request.form.get("street")
+    city = request.form.get("city")
+    zip = request.form.get("zip")  -->
+
+		<a href="/">Home</a>
+
+
+
+ {% endblock content %}
