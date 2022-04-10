@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h6>agent_accountsettings</h6>
+    <h2>Welcome Agent Ayesha!</h2>
+
+	<div class="container">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_postaproperty') }}>Post a Property</a>
+            </li>
+			<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+                <a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+            </li>
+        </ul>
+    </div>
+
+	<h3>&#9881;&#65039; Agent Account Settings</h3>
+
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media-body">
+                <h2 class="account-heading"> {{ current_user.username }} </h2>
+                <p class="text-secondary"> {{ current_user.email }}</p>
+            </div>
+        </div>
+        <!-- FORM START -->
+        <!-- action empty string : go to same route/post info at same route after posting -->
+        <!-- special encoding type to form for form to pass img data properly -->
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+    
+            <!-- each field list of errors if field invalid -->
+            <!-- open up conditional & print out errors -->
+            <!-- Bootstrap: (1) add class of isInvalid to field (2) div underneath w/h class of invalid feedback (3) inside error -->
+    
+            <!-- form-group bootstrap class -->
+            <fieldset class="form-group">
+                <!-- legend for register form -->
+                <legend class="border-bottom mb-4">Account Info</legend>
+    
+                <!-- for groups -->
+    
+                <!-- First Name -->
+                <div class="form-group">
+                    {{ form.first_name.label(class="form-control-label") }}
+    
+                    {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.first_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                        
+                </div>
+                <!-- Last Name -->
+                <div class="form-group">
+                    {{ form.last_name.label(class="form-control-label") }}
+    
+                    {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.last_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                        
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Phone Number -->
+                <div class="form-group">
+                    {{ form.phone_number.label(class="form-control-label") }}
+    
+                    {% if form.phone_number.errors %}
+                        {{ form.phone_number(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone_number.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.phone_number(class="form-control form-control-lg") }}
+                    {% endif %}
+                        
+                </div>
+                <!-- Realty Company -->
+                <div class="form-group">
+                    {{ form.realty_company.label(class="form-control-label") }}
+    
+                    {% if form.realty_company.errors %}
+                        {{ form.realty_company(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.realty_company.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.realty_company(class="form-control form-control-lg") }}
+                    {% endif %}
+                        
+                </div>
+                <!-- Picture -->
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <!-- special encoding type to form for form to pass img data properly -->
+            </fieldset>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>     
+        </form>
+        <!-- FORM ENDS -->
+    </div>
+
+{% endblock content %}

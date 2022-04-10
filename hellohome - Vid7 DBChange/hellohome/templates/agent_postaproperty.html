@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h6>agent_postaproperty</h6>
+	<h2>Welcome Agent Ayesha!</h2>
+
+	<div class="container">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+            </li>
+			<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+                <a class="nav-link" href={{ url_for('agent_postaproperty') }}>Post a Property</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+            </li>
+        </ul>
+    </div>
+
+	<h3>&#9998; Post a Property</h3>
+
+	<form action="/properties" method="POST">
+		<label for="sale_type">Buy or rent?:</label>
+		<input type="text" id="sale_type" name="sale_type"><br>
+		<label for="property_type">Property type?:</label>
+		<input type="text" id="property_type" name="property_type"><br>
+		<label for="price">Price?: $</label>
+		<input type="text" id="price" name="price"><br>
+		<label for="num_bed">Number of beds?:</label>
+		<input type="text" id="num_bed" name="num_bed"><br>
+		<label for="num_bath">Number of baths?:</label>
+		<input type="text" id="num_bath" name="num_bath"><br>
+		<label for="building_size">Building size?:</label>
+		<input type="text" id="building_size" name="building_size"><br>
+		<label for="land_size">Land size?:</label>
+		<input type="text" id="land_size" name="land_size"><br>
+		<label for="street">Street?:</label>
+		<input type="text" id="street" name="street"><br>
+		<label for="city">City?:</label>
+		<input type="text" id="city" name="city"><br>
+		<label for="state">State?:</label>
+		<input type="text" id="state" name="state"><br>
+		<label for="zip">Zip?:</label>
+		<input type="text" id="zip" name="zip"><br><br>>
+	</form>
+
+	<!-- Update Button -->
+	<div class="d-flex justify-content-center">
+		<button type="button" class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body" style="background-color:#04c4d9;color: white !important;">Post</button>
+	</div>
+	
+{% endblock content %}

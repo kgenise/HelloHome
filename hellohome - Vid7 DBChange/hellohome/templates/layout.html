@@ -1,0 +1,144 @@
+<!-- template inheritance -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- URL FOR - find the exact location of routes for us -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+	<style>
+		.account-img {
+			height: 125px;
+			width: 125px;
+			margin-right: 20px;
+			margin-bottom: 16px;
+		}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+	</style>
+
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+
+    
+</head>
+<body>
+    <!-- HEADER BEGINS -->
+    <header class="site-header">
+		<!-- navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<!-- left side -->
+			<div class="collapse navbar-collapse order-lg-1 order-3 navigation-menu">
+				<ul class="navbar-nav mr-auto">
+				  <li class="nav-item active">
+					
+					<a class="nav-link" href={{ url_for('home') }}>
+						<img src="{{url_for('static', filename='home_icon.png')}}"/>
+						<span class="sr-only">(current)
+						</span>
+					</a>
+
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href={{ url_for('about') }}>About</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href={{ url_for('search') }}>Search</a>
+				  </li>
+				</ul>
+			  </div>
+			<!-- left side -->
+			<a class="navbar-brand order-1 mr-lg-0" href={{ url_for('home') }}>
+				<img src="{{url_for('static', filename='newlogo.jpg')}}" width=175px/>
+			</a>
+			<button class="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navigation-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- right side -->
+			<div class="collapse navbar-collapse order-lg-3 order-4 navigation-menu">
+			  <ul class="navbar-nav ml-auto">
+				
+				<!-- FAQ Page -->
+				<li class="nav-item active">
+				  <a class="nav-link" href={{ url_for('faq') }}>FAQ <span class="sr-only">(current)</span></a>
+				</li>
+
+				<!-- start jinga2 conditional -->
+				{% if current_user.is_authenticated %}
+					<!-- YES AUTHENTICATED : LOG OUT  -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbar-list-4">
+						<ul class="navbar-nav ">
+							<li class="nav-item dropdown">
+								<!-- Profile Account Picture -->
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img src="{{url_for('static', filename='/profile_pics/default2.jpg')}}" width="25" height="25" class="rounded-circle">
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									{% if current_user.is_agent %}
+										<a class="dropdown-item"  href={{ url_for('agent_accountsettings') }}>Edit Agent Account</a>
+									{% else %}
+										<a class="dropdown-item"  href={{ url_for('user_accountsettings') }}>Edit User Account</a>
+									{% endif %}
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href={{ url_for('logout') }}>Log Out</a>
+								</div>
+							</li>   
+						</ul>
+					</div>
+				{% else %}
+					<!-- NOT AUTHENTICATED : LOGIN PAGE -->	
+					<li class="nav-item">
+						<a class="nav-link" href={{ url_for('login') }}>Log In</a>
+					</li>
+				{% endif %}
+				<!-- end jinga2 conditional -->
+			  </ul>
+			</div>
+			<!-- right side -->
+		  </nav>
+		  <!-- navbar -->
+	</header>
+    <!-- HEADER ENDS -->
+
+    <main role="main" class="container">
+        <div>
+            <!-- Display flash messages -->
+            <!-- with_categories=true : grab category msg in main.py -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                <!-- print messages from get_flashed_messages method -->
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+
+    </div>
+    </main>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
