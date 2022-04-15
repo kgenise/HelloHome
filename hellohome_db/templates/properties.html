@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Testing Database Stuff</title>
+</head>
+
+<body>
+    <h1>PROPERTIES LISTING INSERT TEST PAGE</h1>
+
+    Welcome, {{name}}! We look forward to seeing you use this site!<br><br>
+
+    <form action="/properties" method="POST" enctype = 'multipart/form-data'>
+        <label for="sale_type">Buy or rent?:</label>
+        <input type="text" id="sale_type" name="sale_type"><br>
+        <label for="property_type">Property type?:</label>
+        <input type="text" id="property_type" name="property_type"><br>
+        <label for="price">Price?: $</label>
+        <input type="text" id="price" name="price"><br>
+        <label for="num_bed">Number of beds?:</label>
+        <input type="text" id="num_bed" name="num_bed"><br>
+        <label for="num_bath">Number of baths?:</label>
+        <input type="text" id="num_bath" name="num_bath"><br>
+        <label for="building_size">Building size?:</label>
+        <input type="text" id="building_size" name="building_size"><br>
+        <label for="land_size">Land size?:</label>
+        <input type="text" id="land_size" name="land_size"><br>
+        <label for="street">Street?:</label>
+        <input type="text" id="street" name="street"><br>
+        <label for="city">City?:</label>
+        <input type="text" id="city" name="city"><br>
+        <label for="state">State?:</label>
+        <input type="text" id="state" name="state"><br>
+        <label for="zip">Zip?:</label>
+        <input type="text" id="zip" name="zip"><br>
+        <label for="file_image">Upload image:</label>
+        <input type="file" class = "file-input" id="file_image" name="file_image"><br><br>
+    
+        <input type="submit" name="agent_form" value="Submit">
+    </form><br><br>
+
+    <a href="/check">Number of properties</a><br>
+    <a href="/logout">Logout to index</a>
+</body>
+
+</html>
