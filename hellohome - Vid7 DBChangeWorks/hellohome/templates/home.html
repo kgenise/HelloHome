@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	<div class="backgroundimage">
+		<div class="container text-center title">
+			<h1>Discover your home here</h1>      
+			<a class="btn" href="#" role="button">BUY</a>
+			<a class="btn" href="#" role="button">RENT</a>
+			<form class="searchbar" method="POST">
+				<!-- <input type="text" name="search" class="input_bx" placeholder="Enter a ZIP code"> -->
+				<input type="text" placeholder="Enter a zipcode" style="width: 50%;">
+				<select name="filter" class="categories">
+				  <option value=""selected>Type</option>
+				  <option value="BUY">BUY</option>
+				  <option value="RENT">RENT</option>
+				</select>
+				<button type="submit" name="submit-search" class="search_btn">
+					<a class="nav-link" href={{ url_for('search') }}>
+						Search
+					</a>
+				</button>
+			  </form>
+		</div>
+	  </div>
+		
+	  <div class="container-fluid bg-3 text-center">    
+		<h2>Top 3 Trending Homes</h2><br>
+		<div class="row">
+			<div class="col-sm-4">
+				<a href='#'><img class='listing-img' src="{{url_for('static', filename='house1.jpg')}}" width="100%"></a>
+				<p id="home_type">For Sale</p>
+				<p id="home_price">$200,000</p>
+				<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+				<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+		  	</div>
+			<div class="col-sm-4"> 
+				<a href='#'><img class='listing-img' src="{{url_for('static', filename='house2.jpg')}}" width="100%"></a>
+				<p id="home_type">For Sale</p>
+				<p id="home_price">$242,000</p>
+				<p id="home_threes">4 bed &#183; 3 bath &#183; 2,508 sqft</p>
+				<p id="home_address">5686 Water Crest Way, Tampa FL 33617</p>
+		  	</div>
+		  	<div class="col-sm-4"> 
+				<a href='#'><img class='listing-img' src="{{url_for('static', filename='house3.jpg')}}" width="100%"></a>
+				<p id="home_type">For Sale</p>
+				<p id="home_price">$182,000</p>
+				<p id="home_threes">3 bed &#183; 1.5 bath &#183; 1,776 sqft</p>
+				<p id="home_address">7656 Bend Dr, Tampa FL 33617</p>
+		  	</div>
+		</div>
+	    
+
+{% endblock content %}
