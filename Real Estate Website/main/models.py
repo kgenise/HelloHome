@@ -106,7 +106,7 @@ class Properties(db.Model):
   property_type = db.Column(db.VARCHAR(100))
   price = db.Column(db.Integer)
   num_bed = db.Column(db.Integer)
-  num_bath = db.Column
+  num_bath = db.Column(db.Integer)
   building_size = db.Column(db.Integer)
   land_size = db.Column(db.Integer)
   street = db.Column(db.VARCHAR(100))
