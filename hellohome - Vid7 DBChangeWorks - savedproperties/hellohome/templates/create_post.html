@@ -1,0 +1,464 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Welcome Agent {{ current_user.first_name }}!</h2>
+
+<div class="container">
+    <ul class="nav nav-tabs nav-fill nav-justified">
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+        </li>
+        <li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+            <a class="nav-link" href={{ url_for('new_post') }}>Post a Property</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+        </li>
+    </ul>
+</div>
+
+<div class="content-section">
+    <!-- action empty string : go to same route/post info at same route after posting -->
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <!-- each field list of errors if field invalid -->
+        <!-- open up conditional & print out errors -->
+        <!-- Bootstrap: (1) add class of isInvalid to field (2) div underneath w/h class of invalid feedback (3) inside error -->
+
+        <!-- form-group bootstrap class -->
+        <fieldset class="form-group">
+            <!-- legend for login form -->
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+
+            <!-- for groups -->
+
+            <!-- 1. For Type -->
+            <div class="form-group">
+                {{ form.for_type.label(class="form-control-label") }}
+                {% if form.for_type.errors %}
+                    {{ form.for_type(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.for_type.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.for_type(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 2. Price -->
+            <div class="form-group">
+                {{ form.price.label(class="form-control-label") }}
+                {% if form.price.errors %}
+                    {{ form.price(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.price.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.price(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 3. Number of Beds -->
+            <div class="form-group">
+                {{ form.num_bed.label(class="form-control-label") }}
+                {% if form.num_bed.errors %}
+                    {{ form.num_bed(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.num_bed.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.num_bed(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 4. Number of Baths -->
+            <div class="form-group">
+                {{ form.num_bath.label(class="form-control-label") }}
+                {% if form.num_bath.errors %}
+                    {{ form.num_bath(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.num_bath.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.num_bath(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 5. Building Size -->
+            <div class="form-group">
+                {{ form.building_size.label(class="form-control-label") }}
+                {% if form.building_size.errors %}
+                    {{ form.building_size(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.building_size.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.building_size(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 6. Land Size -->
+            <div class="form-group">
+                {{ form.land_size.label(class="form-control-label") }}
+                {% if form.land_size.errors %}
+                    {{ form.land_size(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.land_size.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.land_size(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 7. Street -->
+            <div class="form-group">
+                {{ form.street.label(class="form-control-label") }}
+                {% if form.street.errors %}
+                    {{ form.street(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.street.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.street(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 8. City -->
+            <div class="form-group">
+                {{ form.city.label(class="form-control-label") }}
+                {% if form.city.errors %}
+                    {{ form.city(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.city.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.city(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 9. State -->
+            <div class="form-group">
+                {{ form.state.label(class="form-control-label") }}
+                {% if form.state.errors %}
+                    {{ form.state(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.state.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.state(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 10. Zip -->
+            <div class="form-group">
+                {{ form.zip.label(class="form-control-label") }}
+                {% if form.zip.errors %}
+                    {{ form.zip(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.zip.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.zip(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 11. Description -->
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                {% if form.description.errors %}
+                    {{ form.description(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.description(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 12. Property Type -->
+            <div class="form-group">
+                {{ form.gen_property_type.label(class="form-control-label") }}
+                {% if form.gen_property_type.errors %}
+                    {{ form.gen_property_type(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.gen_property_type.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.gen_property_type(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 13. Year Built -->
+            <div class="form-group">
+                {{ form.gen_year_built.label(class="form-control-label") }}
+                {% if form.gen_year_built.errors %}
+                    {{ form.gen_year_built(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.gen_year_built.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.gen_year_built(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 14. Stories -->
+            <div class="form-group">
+                {{ form.gen_stories.label(class="form-control-label") }}
+                {% if form.gen_stories.errors %}
+                    {{ form.gen_stories(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.gen_stories.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.gen_stories(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 15. HOA -->
+            <div class="form-group">
+                {{ form.gen_hoa.label(class="form-control-label") }}
+                {% if form.gen_hoa.errors %}
+                    {{ form.gen_hoa(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.gen_hoa.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.gen_hoa(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 16. Roof -->
+            <div class="form-group">
+                {{ form.ext_roof.label(class="form-control-label") }}
+                {% if form.ext_roof.errors %}
+                    {{ form.ext_roof(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_roof.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_roof(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 17. Construction Materials -->
+            <div class="form-group">
+                {{ form.ext_const_materials.label(class="form-control-label") }}
+                {% if form.ext_const_materials.errors %}
+                    {{ form.ext_const_materials(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_const_materials.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_const_materials(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 18. Road Surface Type -->
+            <div class="form-group">
+                {{ form.ext_road_surf_type.label(class="form-control-label") }}
+                {% if form.ext_road_surf_type.errors %}
+                    {{ form.ext_road_surf_type(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_road_surf_type.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_road_surf_type(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 19. Foundation -->
+            <div class="form-group">
+                {{ form.ext_foundation.label(class="form-control-label") }}
+                {% if form.ext_foundation.errors %}
+                    {{ form.ext_foundation(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_foundation.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_foundation(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 20. Fencing -->
+            <div class="form-group">
+                {{ form.ext_fencing.label(class="form-control-label") }}
+                {% if form.ext_fencing.errors %}
+                    {{ form.ext_fencing(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_fencing.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_fencing(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 21. Parking -->
+            <div class="form-group">
+                {{ form.ext_parking.label(class="form-control-label") }}
+                {% if form.ext_parking.errors %}
+                    {{ form.ext_parking(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_parking.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_parking(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 22. Pool -->
+            <div class="form-group">
+                {{ form.ext_pool.label(class="form-control-label") }}
+                {% if form.ext_pool.errors %}
+                    {{ form.ext_pool(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_pool.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_pool(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 23. Spa -->
+            <div class="form-group">
+                {{ form.ext_spa.label(class="form-control-label") }}
+                {% if form.ext_spa.errors %}
+                    {{ form.ext_spa(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_spa.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_spa(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 24. Sprinklers -->
+            <div class="form-group">
+                {{ form.ext_sprinklers.label(class="form-control-label") }}
+                {% if form.ext_sprinklers.errors %}
+                    {{ form.ext_sprinklers(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_sprinklers.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_sprinklers(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 25. Sewer -->
+            <div class="form-group">
+                {{ form.ext_sewer.label(class="form-control-label") }}
+                {% if form.ext_sewer.errors %}
+                    {{ form.ext_sewer(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.ext_sewer.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.ext_sewer(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 26. Appliances Included -->
+            <div class="form-group">
+                {{ form.int_app_included.label(class="form-control-label") }}
+                {% if form.int_app_included.errors %}
+                    {{ form.int_app_included(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.int_app_included.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.int_app_included(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 27. Flooring -->
+            <div class="form-group">
+                {{ form.int_flooring.label(class="form-control-label") }}
+                {% if form.int_flooring.errors %}
+                    {{ form.int_flooring(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.int_flooring.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.int_flooring(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- 28. Fireplace -->
+            <div class="form-group">
+                {{ form.int_fireplace.label(class="form-control-label") }}
+                {% if form.int_fireplace.errors %}
+                    {{ form.int_fireplace(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.int_fireplace.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Show valid field -->
+                    {{ form.int_fireplace(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <!-- Submit Button -->
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+        
+    </form>
+</div>
+
+{% endblock content %}
