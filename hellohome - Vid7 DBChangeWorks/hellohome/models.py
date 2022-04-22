@@ -3,6 +3,10 @@ from multiprocessing.dummy import active_children
 from wsgiref.validate import validator
 from hellohome import db, login_manager
 from datetime import datetime
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
+from PIL import Image
+import io
 
 # Class UserMixin adds 4 attributes/methods for us
 #extension expect user model to have 4 attributes/methods > Extension add all for us! > Class UserMixin
@@ -17,19 +21,39 @@ from flask_login import UserMixin
 # create function with decorator called USERLOADER | reloading user from user_id stored in the session | extension knows get user by id | naming convention required
 @login_manager.user_loader 
 def load_user(user_id):
-    #return user for id (casted to an int)
-    return User.query.get(int(user_id))
+    #return user for id
+    return User.query.get(user_id)
+
+##### need default image for tables
+def default_picture(file_path, type):
+    # open default profile image from static folder
+    image = Image.open(file_path)
+
+    if type == 'profile':
+        output_size = (125, 125)
+    elif type == 'property':
+        output_size = (600, 300)
+    
+    image.thumbnail(output_size)
+    default_image = io.BytesIO()
+    # save so that PIL know what image format
+    image.save(default_image, format='PNG')
+    # retrieve byte string to save in database
+    byte_image = default_image.getvalue()
+
+    return byte_image
 
 #Create models
 
 #inherit from db.Model
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False) #hashed to 60 characters
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg') #hash: defaultable
+    # image_file = db.Column(db.String(20), nullable=False, default='default.jpg') #hash: defaultable
+    image_file = db.Column(db.LargeBinary, default=default_picture('hellohome\static\profile_pics\default.jpg', 'profile'))
 
     is_agent = db.Column(db.Boolean)
     phone_number = db.Column(db.String(10), nullable=True)
@@ -74,6 +98,7 @@ class Properties(db.Model):
     city = db.Column(db.String(20))
     state = db.Column(db.String(2))
     zip = db.Column(db.Integer)
+    image = db.Column(db.LargeBinary, default=default_picture('hellohome\static\house1.jpg', 'property'))
 
     description = db.Column(db.Text, nullable=False)
     gen_property_type = db.Column(db.String(13))
@@ -97,7 +122,7 @@ class Properties(db.Model):
     int_fireplace = db.Column(db.Boolean)
 
     # u ser : referencing TABLENAME & COLUMNNAME
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE', match='FULL'), nullable=False)
 
     #how object printed when printed out
     def __repr__(self):

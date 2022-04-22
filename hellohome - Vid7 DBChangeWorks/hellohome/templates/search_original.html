@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid bg-3 text-center">    
+	<div class="row">
+		<!-- 1. Search bar -->
+			<input type="text" placeholder="Enter a zipcode" style="width: 30%;">
+        
+        <!-- 2. Price -->
+			<label for="cars">Type:</label>
+			<select name="saletype" id="cars">
+				<option value="forsale">For Sale</option>
+				<option value="forrent">For Rent</option>
+			</select>
+
+		<!-- 3. Price -->
+			<label for="price">Price:</label>
+			<select name="price" id="price">
+				<option value="1">$10,000+</option>
+				<option value="2">$25,000+</option>
+				<option value="3">$50,000+</option>
+				<option value="4">$75,000+</option>
+				<option value="5">$100,000+</option>
+				<option value="6">$120,000+</option>
+				<option value="7">$150,000+</option>
+				<option value="8">$175,000+</option>
+				<option value="9">$200,000+</option>
+				<option value="10">$300,000+</option>
+				<option value="11">$400,000+</option>
+			</select>
+
+		<!-- 4. Property Type -->
+			<label for="propertytype">Property Type:</label>
+			<select name="propertytype" id="propertytype">
+				<option value="1">Single Family</option>
+				<option value="2">Townhouse</option>
+				<option value="3">Multifamily</option>
+				<option value="4">Condo</option>
+				<option value="house">House</option>
+				<option value="apartment">Apartment</option>
+			</select>
+
+		<!-- 5. Beds -->
+			<label for="beds">Beds:</label>
+			<select name="beds" id="beds">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="5">4+</option>
+            </select>
+
+		<!-- 6. Baths -->
+			<label for="baths">Baths:</label>
+			<select name="baths" id="baths">
+				<option value="1">Any</option>
+				<option value="2">1+</option>
+				<option value="3">2+</option>
+				<option value="4">3+</option>
+				<option value="5">4+</option>
+			</select>
+
+			<button type="submit" name="submit-search" class="search_btn" >Search</button>
+	</div>
+</div>
+
+<p>{{properties|length}} homes found!</p>
+	
+{% for property in properties %}
+<!-- Display on Page -->
+<div class="container-fluid bg-3 text-center"> 
+	<div class="row" style="border:1px black solid">
+		<!-- Picture on left -->
+		<div class="col-sm-3"> 
+			<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+			<a class="article-title" href="{{ url_for('post', property_id=property.id)}}">
+				<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+			</a>
+		</div>
+		<!-- Details in middle -->
+		<div class="col-sm"> 
+			<p id="home_type">For {{ property.for_type }}</p>
+			<p id="home_price">${{ property.price }}</p>
+			<p id="home_threes">{{ property.num_bed }} bed &#183; {{ property.num_bath }} bath &#183; {{ property.building_size }} sqft</p>
+			<p id="home_address">{{ property.street }}, {{ property.city }} {{ property.state }} {{ property.zip }}</p>
+			<p id="home_realtycompany"> {{ property.agent.realty_company }} </p>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+
+
+{% endblock content %}

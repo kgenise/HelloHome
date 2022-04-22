@@ -28,8 +28,8 @@
 				<!-- Picture on left -->
 				<div class="col-sm-3"> 
 					<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
-					<a class="article-title" href="{{ url_for('post', property_id=property.id)}}">
-						<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+					<a class="article-title" href="{{ url_for('post', property_id=property.id) }}">
+						<img src="{{ property.image }}" width="100%">
 					</a>
 				</div>
 				<!-- Details in middle -->

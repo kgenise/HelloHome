@@ -162,6 +162,7 @@ class PostForm(FlaskForm):
                             validators=[DataRequired()],
                             choices=[('FL', 'Florida'), ('GA', 'Georgia')])
     zip = StringField('Zip', validators=[DataRequired(), Length(min=5,max=5), Regexp('[0-9]{5}', message="Please enter a 5-digit zipcode. For example: 33617")])
+    picture = FileField('Property Picture', validators=[FileAllowed(['jpg', 'png'])])
 
     description = TextAreaField('Description', validators=[DataRequired()])
     gen_property_type = SelectField('Property Type', 

@@ -6,7 +6,7 @@
     <!-- Picture -->
     <div class="row">
         <div class="col-md-9 mx-auto">
-            <img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+            <img src="{{ property_image }}" width="100%">
         </div>
     </div>
     <!-- Main Details + Contact Us -->
@@ -23,7 +23,7 @@
 
             <!-- start jinga2 conditional -->
             {% if current_user.is_authenticated and current_user.is_agent %}
-                <img src="{{url_for('static', filename='/profile_pics/' + property.agent.image_file)}}" width="30" height="30" class="rounded-circle">
+                <img src="{{ agent_image }}" width="30" height="30" class="rounded-circle">
                 <p>
                     {{ property.agent.first_name }} {{ property.agent.last_name }}<br>
                     {{ property.agent.phone_number }}<br>

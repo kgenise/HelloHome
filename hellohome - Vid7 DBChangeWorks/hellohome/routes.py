@@ -6,6 +6,8 @@ import secrets
 
 # image optimization Image class
 from PIL import Image
+import io
+import base64
 
 from msilib.schema import Property, ServiceControl
 
@@ -36,7 +38,12 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    if current_user.is_authenticated:
+        profile_image = convert_picture(current_user.image_file)
+    else:
+        profile_image = default_profile_picture('hellohome\static\profile_pics\default.jpg')
+
+    return render_template('home.html', image_file=profile_image)
     
 @app.route("/about")
 def about():
@@ -160,28 +167,70 @@ def logout():
 def user_landing_mysavedproperties():
     return render_template('user_landing_mysavedproperties.html')
 
-def save_picture(form_picture):
-    #random hex name
-    random_hex = secrets.token_hex(8)
+# def save_picture(form_picture):
+#     #random hex name
+#     random_hex = secrets.token_hex(8)
 
-    #grab file extension: filename w/o extension AND extension itself
-    # _ throw away an unused variable
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
+#     #grab file extension: filename w/o extension AND extension itself
+#     # _ throw away an unused variable
+#     _, f_ext = os.path.splitext(form_picture.filename)
+#     picture_fn = random_hex + f_ext
 
-    #root path all they way upto pkg dir 
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+#     #root path all they way upto pkg dir 
+#     picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
 
+#     #optimize image
+#     output_size = (125, 125)
+#     i = Image.open(form_picture)
+#     i.thumbnail(output_size)
+
+#     #save the form_picture to filesystem
+#     i.save(picture_path)
+
+#     #update user's profile picture in SEPARATE function
+#     return picture_fn
+
+def save_picture(form_picture, type):
+    # get bytes from FileStorage object
+    input_image = form_picture.read()
+    i = Image.open(io.BytesIO(input_image))
+    #i.show()
+    
     #optimize image
-    output_size = (125, 125)
-    i = Image.open(form_picture)
+    if type == 'profile':
+        output_size = (125, 125)
+    if type == 'property':
+        output_size = (600, 300)
+
     i.thumbnail(output_size)
 
-    #save the form_picture to filesystem
-    i.save(picture_path)
+    display_image = io.BytesIO()
+    
+    #save the form_picture
+    i.save(display_image, format='PNG')
 
-    #update user's profile picture in SEPARATE function
-    return picture_fn
+    # return image bytes
+    bytes_image = display_image.getvalue()
+
+    return bytes_image
+
+def convert_picture(image):
+    i = Image.open(io.BytesIO(image))
+    #i.show()
+    image_file = io.BytesIO()
+    i.save(image_file, format='PNG')
+    
+    #encode the saved image file for html use
+    dataurl = 'data:image/png;base64,' + base64.b64encode(image_file.getvalue()).decode('ascii')
+
+    return dataurl
+
+def default_profile_picture(file_path):
+    image = Image.open(file_path)
+    default_image = io.BytesIO()
+    image.save(default_image, format='PNG')
+    dataurl = 'data:image/png;base64,' + base64.b64encode(default_image.getvalue()).decode('ascii')
+    return dataurl
 
 @app.route("/user_accountsettings", methods=['GET', 'POST'])
 #need to login to access route
@@ -199,7 +248,7 @@ def user_accountsettings():
 
         #set user's profile picture (optional) to picture file
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_picture(form.picture.data, 'profile')
             current_user.image_file = picture_file
 
         current_user.first_name = form.first_name.data.title()
@@ -215,9 +264,11 @@ def user_accountsettings():
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+        form.picture.data = current_user.image_file
 
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('user_accountsettings.html', title='User Account Settings', image_file=image_file, form=form)
+    user_image = convert_picture(current_user.image_file)
+
+    return render_template('user_accountsettings.html', title='User Account Settings', image_file=user_image, form=form)
 
 ##### AGENT PORTAL PAGES
 
@@ -244,6 +295,7 @@ def new_post():
             city = form.city.data.title(),
             state = form.state.data,
             zip = form.zip.data,
+            image = form.picture.data,
 
             description = form.description.data,
             gen_property_type = form.gen_property_type.data,
@@ -267,6 +319,10 @@ def new_post():
             int_fireplace = form.int_fireplace.data,
             agent=current_user)
         
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data, 'property')
+            property.image = picture_file
+        
         db.session.add(property)
         db.session.commit() 
         flash('Your post has been created!', 'success')
@@ -277,7 +333,10 @@ def new_post():
 @app.route("/post/<int:property_id>", methods=['GET', 'POST'])
 def post(property_id):
     property = Properties.query.get_or_404(property_id)
-    return render_template('property.html', title='property.street', property=property)
+    property_image = convert_picture(property.image)
+    agent_image = convert_picture(property.agent.image_file)
+
+    return render_template('property.html', title=property.street, property=property, property_image=property_image, agent_image=agent_image)
 
 @app.route("/post/<int:property_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -319,6 +378,10 @@ def update_post(property_id):
         property.int_flooring = form.int_flooring.data
         property.int_fireplace = form.int_fireplace.data
         #no need to db.session.add() since already in database, we are just updating
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data, 'property')
+            property.image = picture_file
+
         db.session.commit()
         flash('Your post has been updated', 'success')
         return redirect(url_for('post', property_id=property.id))
@@ -334,6 +397,9 @@ def update_post(property_id):
         form.city.data = property.city
         form.state.data = property.state
         form.zip.data = property.zip
+
+        form.picture.data = property.image
+
         form.description.data = property.description
         form.gen_property_type.data = property.gen_property_type
         form.gen_year_built.data = property.gen_year_built
@@ -384,7 +450,7 @@ def agent_accountsettings():
 
         #set user's profile picture (optional) to picture file
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_picture(form.picture.data, 'profile')
             current_user.image_file = picture_file
 
         current_user.first_name = form.first_name.data.title()
@@ -404,6 +470,100 @@ def agent_accountsettings():
         form.email.data = current_user.email
         form.phone_number.data = current_user.phone_number
         form.realty_company.data = current_user.realty_company
+        form.picture.data = current_user.image_file
 
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('agent_accountsettings.html', title='Agent Account Settings', image_file=image_file, form=form)
+    user_image = convert_picture(current_user.image_file)
+
+    return render_template('agent_accountsettings.html', title='Agent Account Settings', image_file=user_image, form=form)
+
+### SEARCH FILTERS
+
+@app.route("/viewing")
+def view():
+    properties = Properties.query.all()
+
+    search = request.args.get('search')
+    
+    # Search bar (zipcodes)
+    if search: 
+        properties = Properties.query.filter(Properties.zip.contains(search))
+    else:
+        properties = Properties.query.all()
+
+    saletype = request.args.get('saletype')
+    price = request.args.get('price')
+    propertytype = request.args.get('propertytype')
+    beds = request.args.get('beds')
+    baths = request.args.get('baths')
+ 
+    # Search Conditions for filters
+    if (saletype != None):
+        properties = Properties.query.filter(Properties.for_type == saletype)
+    
+    if (propertytype != None) :
+        properties = Properties.query.filter(Properties.gen_property_type == propertytype)
+
+    if (beds != None) :
+        properties = Properties.query.filter(Properties.num_bed >= beds)
+    
+    if (baths != None) :
+        properties = Properties.query.filter(Properties.num_bath >= baths)
+
+    if (price != None):
+        properties = Properties.query.filter(Properties.price >= price)
+
+    if (saletype != None and price != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype, Properties.price >= price)
+
+    if (saletype != None and propertytype != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype, Properties.property_type == propertytype)
+
+    if (saletype != None and beds != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype, Properties.num_bed >= beds)
+
+    if (saletype != None and baths != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype, Properties.num_bath >= baths)
+
+    if (saletype != None and propertytype != None and price != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype , Properties.property_type == propertytype, Properties.price >= price)
+
+    if (saletype != None and propertytype != None and price != None and beds != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype , Properties.property_type == propertytype, Properties.price >= price, Properties.num_bed >= beds)
+
+    if (saletype != None and propertytype != None and price != None and beds != None and baths != None):
+        properties = Properties.query.filter(Properties.sale_type == saletype , Properties.property_type == propertytype, Properties.price >= price, Properties.num_bed >= beds, Properties.num_bath >= baths)
+
+    if (price != None and propertytype != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.property_type == propertytype)
+
+    if (price != None and beds != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.num_bed >= beds)
+
+    if (price != None and baths != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.num_bath >= baths)
+    
+    if (price != None and baths != None and beds != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.num_bath >= baths, Properties.num_bed >= beds)
+
+    if (price != None and propertytype != None and beds != None and baths != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.property_type == propertytype, Properties.num_bed >= beds, Properties.num_bath >= baths)
+
+    if (price != None and propertytype != None and beds != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.property_type == propertytype, Properties.num_bed >= beds)
+
+    if (price != None and propertytype != None and baths != None):
+        properties = Properties.query.filter(Properties.price >= price, Properties.property_type == propertytype, Properties.num_bath >= baths)
+
+    if (propertytype != None and beds != None):
+        properties = Properties.query.filter(Properties.property_type == propertytype, Properties.num_bed >= beds)
+
+    if (propertytype != None and baths != None):
+        properties = Properties.query.filter(Properties.property_type == propertytype, Properties.num_bath >= baths)
+
+    if (propertytype != None and beds != None and baths != None):
+        properties = Properties.query.filter(Properties.property_type == propertytype, Properties.num_bed >= beds, Properties.num_bath >= baths)
+
+    if (beds != None and baths != None):
+        properties = Properties.query.filter(Properties.num_bed >= beds, Properties.num_bath >= baths)
+
+    return render_template("search.html", properties=properties)
