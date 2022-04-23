@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h2>Welcome Agent {{ current_user.first_name }}!</h2>
+
+	<div class="container">
+		<ul class="nav nav-tabs nav-fill nav-justified">
+			<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+				<a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href={{ url_for('new_post') }}>Post a Property</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+			</li>
+		</ul>
+	</div>
+
+	<h3>&#10064; My Posted Properties</h3>
+
+	<p>You have posted {{properties|length}} properties!</p>
+
+	{% for property in properties %}
+		<!-- Display on Page -->
+		<div class="container-fluid bg-3 text-center"> 
+			<div class="row" style="border:1px black solid">
+				<!-- Picture on left -->
+				<div class="col-sm-3"> 
+					<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+					<a class="article-title" href="{{ url_for('post', property_id=property.id)}}">
+						<img src="{{ url_for('static', filename='property_pics/' + property.property_image_file) }}" width="100%">
+					</a>
+				</div>
+				<!-- Details in middle -->
+				<div class="col-sm"> 
+					<p id="home_type">For {{ property.for_type }}</p>
+					<p id="gen_property_type">{{ property.gen_property_type }}</p>
+					<p id="home_price">${{ property.price }}</p>
+					<p id="home_threes">{{ property.num_bed }} bed &#183; {{ property.num_bath }} bath &#183; {{ property.building_size }} sqft</p>
+					<p id="home_address">{{ property.street }}, {{ property.city }} {{ property.state }} {{ property.zip }}</p>
+					<p id="home_realtycompany"> {{ property.agent.realty_company }} </p>
+				</div>
+				<div class="col-sm">
+					{% if property.agent == current_user %}
+						<div>
+							<!-- Update Property -->
+							<a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_post', property_id=property.id )}}">Update</a>
+
+							<!-- Delete Property -->
+							<button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="deleteModal" tabindex="-1" roles="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="deleteModalLabel">Delete Property?</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden=""true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<form action="{{ url_for('delete_post', property_id=property.id) }}" method="POST">
+												<input class="btn btn-danger" type="submit" value="Delete">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	
+
+
+
+{% endblock content %}

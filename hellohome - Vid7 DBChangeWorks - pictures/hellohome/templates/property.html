@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <!-- Picture -->
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <img src="{{ url_for('static', filename='property_pics/' + property.property_image_file) }}" width="100%">
+        </div>
+    </div>
+    <!-- Main Details + Contact Us -->
+    <div class="row">
+        <div class="col-md-9 ml-auto">
+            <p id="home_type">For {{ property.for_type }}</p>
+			<p id="home_price">${{ property.price }}</p>
+			<p id="home_threes">{{ property.num_bed }} bed &#183; {{ property.num_bath }} bath &#183; {{ property.building_size }} sqft</p>
+			<p id="home_address">{{ property.street }}, {{ property.city }} {{ property.state }} {{ property.zip }}</p>
+			<p id="home_realtycompany"> {{ property.agent.realty_company }} </p>
+        </div>
+
+        <div class="col-md-3 mx-auto">
+            
+            <!-- start jinga2 conditional -->
+            {% if current_user.is_authenticated and not current_user.is_agent %}
+                <!-- Display Contact Info if USER -->
+                <h5>Contact Us</h5>
+                <img src="{{url_for('static', filename='/profile_pics/' + property.agent.image_file)}}" width="30" height="30" class="rounded-circle">
+                <p>
+                    {{ property.agent.first_name }} {{ property.agent.last_name }}<br>
+                    {{ property.agent.phone_number }}<br>
+                    {{ property.agent.email }}<br>
+                    {{ property.agent.realty_company }}
+                </p>
+                <!-- WAS HERE -->
+            {% elif current_user.is_authenticated and current_user.is_agent %}
+                <!-- Display NO Contact Info if AGENT -->
+            {% else %}
+                <!-- Display Sign In info if ANONYMOUS USER -->
+                <h5>Contact Us - agent</h5>
+                <button class="signin_btn">
+                    <a class="nav-link" href={{ url_for('login') }}>
+                        Sign In
+                    </a>
+                </button>
+            {% endif %}
+            <!-- end jinga2 conditional -->
+        </div>
+    </div>
+
+    <h5>Description</h5>
+    <!-- Description -->
+    <div class="row">
+        <div class="col-md-9 ml-auto">
+            <p>{{ property.description }}</p>
+        </div>
+        <div class="col-md-3 mx-auto">
+            {% if current_user.is_authenticated and not current_user.is_agent %}
+                <!-- Display "Save Property" Button if USER -->
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <!-- form-group bootstrap class -->
+                    <fieldset>
+                        <!-- Saved Properties Submit Button will change style depending on whether it is already been saved by the user -->
+                        {% if property in current_user.savedProps %}
+                            {{ form.submit(class="btn btn-info m-0") }}
+                        {% else %}
+                            {{ form.submit(class="btn btn-secondary m-0") }}
+                        {% endif %}
+                    </fieldset>                  
+                </form>         
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Property Details > General -->
+    <div class="row">
+        <h5>General</h5>
+        <div class="col-md ml-auto">
+            <p><b>Property Type:</b> {{ property.gen_property_type  }}</p>
+            <p><b>Year Built:</b> {{ property.gen_year_built  }} </p>
+            <p><b>Stories:</b> {{ property.gen_stories }}</p>
+            <p><b>HOA:</b> {{ property.gen_hoa }} </p>
+            <p><b>Saved:</b> {{ property.savers|length }} </p>
+        </div>
+    </div>
+    <!-- Property Details > Exterior -->
+    <div class="row">
+        <h5>Exterior</h5>
+        <div class="col-md ml-auto">
+            <p><b>Roof:</b> {{ property.ext_roof }} </p>
+            <p><b>Construction Materials:</b> {{ property.ext_const_materials }} </p>
+            <p><b>Road Surface Type:</b> {{ property.ext_road_surf_type }}</p>
+            <p><b>Foundation:</b> {{ property.ext_foundation }} </p>
+            <p><b>Fencing:</b> {{ property.ext_fencing }} </p>
+            <p><b>Parking:</b> {{ property.ext_parking  }} </p>
+            <p><b>Pool:</b> {{ property.ext_pool }} </p>
+            <p><b>Spa:</b> {{ property.ext_spa  }} </p>
+            <p><b>Sprinklers:</b> {{ property.ext_sprinklers }} </p>
+            <p><b>Sewer:</b> {{ property.ext_sewer }} </p>
+        </div>
+    </div>
+    <!-- Property Details > Interior -->
+    <div class="row">
+        <h5>Interior</h5>
+        <div class="col-md ml-auto">
+            <p><b>Applicances Included:</b> {{ property.int_app_included }}</p>
+            <p><b>Flooring:</b> {{ property.int_flooring }} </p>
+            <p><b>Fireplace:</b> {{ property.int_fireplace }} </p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
