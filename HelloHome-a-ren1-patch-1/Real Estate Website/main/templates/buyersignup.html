@@ -1,0 +1,47 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Create buyer account</title>
+	</head>
+	<body> -->
+        
+        {% extends "layout.html" %}
+
+        {% block content %}
+            
+        
+    
+        <h1>Create a Buyer Account</h1>
+        
+<!-- sign up form -->
+
+        <form method = "POST" action ="">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.firstName.label }}
+                {{ form.firstName }}<br><br>
+                {{ form.lastName.label }}
+                {{ form.lastName }}<br><br>
+                {{ form.email.label }}
+                {{ form.email }}<br><br>
+                {{ form.password.label }}
+                {{ form.password }}<br><br>
+                {{ form.confPassword.label }}
+                {{ form.confPassword }}<br><br>
+                {{ form.submit }}<br><br>
+
+            </div>
+
+        </form>
+
+
+        <div>
+            <p class="text-muted">
+                If you already have an account, sign in <a href="/login">here</a>
+            </p>
+        </div>
+        <br><br>
+
+            
+        {% endblock content %}

@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+	<ul class="nav nav-tabs nav-fill nav-justified">
+		<li class="nav-item">
+			<a class="nav-link" href="/login">Sign In</a>
+		</li>
+		<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+			<a class="nav-link" href="/register"}>Register</a>
+		</li>
+	</ul>
+</div>
+
+<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+	<div class="container h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+				<div class="card" style="border-radius: 15px;">
+				    <div class="card-body p-5">
+					    <form method = "POST" action ="">
+                            {{ form.hidden_tag() }}
+                            <!-- First Name -->
+                                 
+						    <div class="form-outline mb-4">
+                                {{ form.firstName.label }}
+                                {{ form.firstName }}
+						    </div>
+                                                       
+                            <!-- Last Name -->
+
+                            <div class="form-outline mb-4">
+                                {{ form.lastName.label }}
+                                {{ form.lastName }}
+						    </div>
+
+                            <!-- Email Address -->
+                                
+						    <div class="form-outline mb-4">
+                                {{ form.email.label }}
+                                {{ form.email }}
+						    </div>
+                            
+                            <!-- Password -->
+                                
+						    <div class="form-outline mb-4">
+                                {{ form.password.label }}
+                                {{ form.password }}
+						    </div>
+
+                            <!-- Repeat Password -->
+						    <div class="form-outline mb-4">
+                                {{ form.confPassword.label }}
+                                {{ form.confPassword }}
+						    </div>
+                            
+
+                            <!-- Checkbox: I am an agent -->
+                            <div class="checkbox">
+                                <!-- <input type="checkbox" id="agent" name="agent" value="yes" onclick="showHideAgentInfo()">  
+                                <label for="agent"> I am an agent </label> -->
+                                {{ form.accountType.label }}
+                                {{ form.accountType }}
+                            </div>
+                            
+                            <!-- AgentInfo(Phone Number & Realty Company) revealed -->
+                            <div id="agentInfo">
+                                
+                                <!-- Phone Number -->
+
+                                   
+						        <div class="form-outline mb-4">
+                                    {{ form.phone.label}}
+                                    {{ form.phone}}
+						        </div>
+                            
+                                <!-- Realty Company -->
+                               
+                                <div class="form-outline mb-4">
+                                    {{ form.company.label }}
+                                    {{ form.company }}
+                                </div>   
+                            </div> 
+
+                            <!-- Register Button -->
+                            
+						    <div class="d-flex justify-content-center">
+                                {{ form.submit }}
+						    </div>
+
+                            <!-- Sign In Link -->
+                            <div class="d-grid gap-4 d-md-flex ">
+                                <p>Already have an account? <a href="/login"> Login here</a></p>
+                            </div>
+						
+
+					    </form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}
