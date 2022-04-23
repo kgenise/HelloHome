@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Welcome HelloHome!</h2>
+
+	<div class="container-fluid bg-3 text-center">    
+		<div class="row">
+			<div class="col-sm-6">
+				<img class="img-fluid" src="{{url_for('static', filename='house1.jpg')}}">
+		  	</div>
+			<div class="col-sm-6"> 
+				<p>
+					HelloHome was created by 4 individuals, Katherine Wilkins, Ayesha Siddiqua, Alyssa Ren, and Mansi Patel. Our group is officially named KALM, by our 4 original members, but even after group reorganization, we decided to keep the name. KALM, pronounced as "calm", describes our work nature of working calmy under pressure and delivering results! 
+				</p>
+				<p>
+					HelloHome was created with the mission to be a top-tiered real estate site for buyers, renters, real-estate agents, and more! We have researched the major features of the trending real-estate sites to curate a site that will combine the best features of the current real-estate sites available. We are consistently improving our design and available features so HelloHome's vistors always have the best experience!
+			
+					Happy home hunting, selling, and renting! - from the HelloHome team
+				</p>
+		  	</div>
+		</div>
+{% endblock content %}
