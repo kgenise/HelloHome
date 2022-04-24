@@ -1,9 +1,3 @@
-#to grab file extension
-import os
-
-#random hex for picture filenames
-import secrets
-
 # image optimization Image class
 from PIL import Image
 import io
@@ -28,9 +22,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 from sqlalchemy import func
 
-import sys
-import zlib
-
 # routes: what type into our browser to go to different pages
 # route decorators: handle backend for additional functionality will be shown on this SPECIFIC route
 # "/" = root = home page
@@ -51,7 +42,7 @@ def home():
     group by user_property.property_id                                        group_by(User.id)
     order by counts desc                                                    order_by(User.name.desc())
     limit 3;                                                                limit(2)
-"""
+    """
 
     search = request.args.get('search')
 
@@ -210,10 +201,6 @@ def search():
         
     return render_template('search.html', properties=properties, form=form, image_file=profile_image)
 
-# @app.route("/manageproperties")
-# def manageproperties():
-#     return render_template('manageproperties.html')
-
 @app.route("/faq")
 def faq():
     profile_image = user_image()
@@ -342,7 +329,6 @@ def save_picture(form_picture, type, default):
 
     # return image bytes
     dataurl = base64.b64encode(display_image.getvalue()).decode('ascii')
-    # compressed = zlib.compress(dataurl)
 
     return dataurl
 
@@ -545,21 +531,6 @@ def update_post(property_id):
         form.int_flooring.data = property.int_flooring
         form.int_fireplace.data = property.int_fireplace
         
-        # # Checking size of text
-        # text_size=sys.getsizeof(property.image)
-
-        # # Compressing text
-        # compressed = zlib.compress(property.image.encode())
-
-        # # Checking size of text after compression
-        # csize=sys.getsizeof(compressed)
-
-        # original_stdout = sys.stdout # Save a reference to the original standard output
-        # with open('filename.txt', 'w') as f:
-        #     sys.stdout = f # Change the standard output to the file we created.
-        #     print("\nsize of original text",text_size)
-        #     print("\nsize of compressed text",csize)
-        # sys.stdout = original_stdout # Reset the standard output to its original value
     return render_template('create_post.html', title='Update Post', form=form, legend='Update Post', image_file=current_user.image_file)
 
 @app.route("/post/<int:property_id>/delete", methods=['POST'])
