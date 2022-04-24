@@ -30,8 +30,6 @@ from sqlalchemy import func
 @app.route("/")
 @app.route("/home")
 def home():
-    profile_image = user_image()
-
     properties = Properties.query.join(user_property,(user_property.c.property_id == Properties.id)).group_by(Properties.id).order_by( func.count(user_property.c.property_id).desc() ).limit(3)
 
     """
@@ -63,30 +61,19 @@ def home():
             return render_template('search.html', properties=properties)
         
     if current_user.is_authenticated:        
-        return render_template('home.html', properties=properties, image_file=profile_image)
+        return render_template('home.html', properties=properties, image_file=current_user.image_file)
     else:
         return render_template('home.html', properties=properties)
-
-def user_image():
-    if current_user.is_authenticated:
-        profile_image = current_user.image_file
-    else:
-        profile_image = save_picture('hellohome\static\profile_pics\default.jpg', 'profile', 'default')
-    
-    return profile_image
     
 @app.route("/about")
 def about():
-    profile_image = user_image()
-    
     if current_user.is_authenticated:        
-        return render_template('about.html', title='About', image_file=profile_image)
+        return render_template('about.html', title='About', image_file=current_user.image_file)
     else:
         return render_template('about.html', title='About')
 
 @app.route("/search")
 def search():
-    profile_image = user_image()
     form = SaveProperty()
     properties = Properties.query.all()
     
@@ -206,16 +193,14 @@ def search():
             properties = Properties.query.all()
         
     if current_user.is_authenticated:        
-        return render_template('search.html', properties=properties, form=form, image_file=profile_image)
+        return render_template('search.html', properties=properties, form=form, image_file=current_user.image_file)
     else:
         return render_template('search.html', properties=properties, form=form)
 
 @app.route("/faq")
 def faq():
-    profile_image = user_image()
-    
     if current_user.is_authenticated:        
-        return render_template('faq.html', image_file=profile_image)
+        return render_template('faq.html', image_file=current_user.image_file)
     else:
         return render_template('faq.html')
 
