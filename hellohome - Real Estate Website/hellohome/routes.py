@@ -62,8 +62,10 @@ def home():
             properties = Properties.query.filter(Properties.for_type == "Rent")
             return render_template('search.html', properties=properties)
         
-            
-    return render_template('home.html', properties=properties, image_file=profile_image)
+    if current_user.is_authenticated:        
+        return render_template('home.html', properties=properties, image_file=profile_image)
+    else:
+        return render_template('home.html', properties=properties)
 
 def user_image():
     if current_user.is_authenticated:
@@ -76,7 +78,11 @@ def user_image():
 @app.route("/about")
 def about():
     profile_image = user_image()
-    return render_template('about.html', title='About', image_file=profile_image)
+    
+    if current_user.is_authenticated:        
+        return render_template('about.html', title='About', image_file=profile_image)
+    else:
+        return render_template('about.html', title='About')
 
 @app.route("/search")
 def search():
@@ -199,12 +205,19 @@ def search():
         else:
             properties = Properties.query.all()
         
-    return render_template('search.html', properties=properties, form=form, image_file=profile_image)
+    if current_user.is_authenticated:        
+        return render_template('search.html', properties=properties, form=form, image_file=profile_image)
+    else:
+        return render_template('search.html', properties=properties, form=form)
 
 @app.route("/faq")
 def faq():
     profile_image = user_image()
-    return render_template('faq.html', image_file=profile_image)
+    
+    if current_user.is_authenticated:        
+        return render_template('faq.html', image_file=profile_image)
+    else:
+        return render_template('faq.html')
 
 ##### REGISTER
 
