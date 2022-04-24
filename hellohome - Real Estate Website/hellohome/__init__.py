@@ -16,7 +16,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
 #extract from config.py file
-# from config import host, port, database, user, password
+from hellohome.config import host, port, database, user, password
 
 # import app varia  ble: set to instance of flask class, passing __name__
 # __name__: special python variable represents module name
@@ -33,10 +33,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '7d43f48cb2361993c56d7d2012803df7'
 
 #Set URI
-# app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{user}:{password}@{host}:{port}/{database}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{user}:{password}@{host}:{port}/{database}"
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zxkcchntuqdmgn:097bdf7f9637792a36d5ec03acc859bda681f78611c2ffc180eea5e33750c174@ec2-18-214-134-226.compute-1.amazonaws.com:5432/d31no865tm4dj8'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://iuhoddygfyicbe:40dce1a7748da81a09490e042b87bf3215b135e5099c06460a852a37ca8b1409@ec2-44-194-92-192.compute-1.amazonaws.com:5432/de4f8aa2uagb7k'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zxkcchntuqdmgn:097bdf7f9637792a36d5ec03acc859bda681f78611c2ffc180eea5e33750c174@ec2-18-214-134-226.compute-1.amazonaws.com:5432/d31no865tm4dj8'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://iuhoddygfyicbe:40dce1a7748da81a09490e042b87bf3215b135e5099c06460a852a37ca8b1409@ec2-44-194-92-192.compute-1.amazonaws.com:5432/de4f8aa2uagb7k'
 
 #SQLAlchemy database instance
 #db structure as classes/models
