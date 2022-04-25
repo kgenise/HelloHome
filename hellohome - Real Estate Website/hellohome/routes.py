@@ -446,7 +446,10 @@ def post(property_id):
             db.session.commit()
     ####
 
-    return render_template('property.html', title=property.street, property=property, form=form, image_file=current_user.image_file)
+    if current_user.is_authenticated:        
+        return render_template('property.html', title=property.street, property=property, form=form, image_file=current_user.image_file)
+    else:
+        return render_template('property.html', title=property.street, property=property, form=form)
 
 @app.route("/post/<int:property_id>/update", methods=['GET', 'POST'])
 @login_required
