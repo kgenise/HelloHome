@@ -53,24 +53,30 @@ def home():
             properties = Properties.query.filter(Properties.for_type == "Sale")
             # return redirect(url_for("search", properties=properties, **request.args))
             return render_template('search.html', properties=properties)
-            
         
     if request.method == "GET":
         if request.args.get('RENT'):
             properties = Properties.query.filter(Properties.for_type == "Rent")
             return render_template('search.html', properties=properties)
         
-    if current_user.is_authenticated:        
-        return render_template('home.html', properties=properties, image_file=current_user.image_file)
+    # if current_user.is_authenticated:        
+    #     return render_template('home.html', properties=properties, image_file=current_user.image_file)
+    # else:
+    #     return render_template('home.html', properties=properties)
+
+    return render_template('home.html', properties=properties, image_file=user_image())
+
+def user_image():
+    if current_user.is_authenticated:
+        image_file = current_user.image_file
     else:
-        return render_template('home.html', properties=properties)
+        image_file = save_picture('hellohome\static\profile_pics\default.jpg', 'profile', 'default')
     
+    return image_file
+
 @app.route("/about")
 def about():
-    if current_user.is_authenticated:        
-        return render_template('about.html', title='About', image_file=current_user.image_file)
-    else:
-        return render_template('about.html', title='About')
+    return render_template('about.html', title='About', image_file=user_image())
 
 @app.route("/search")
 def search():
@@ -192,17 +198,11 @@ def search():
         else:
             properties = Properties.query.all()
         
-    if current_user.is_authenticated:        
-        return render_template('search.html', properties=properties, form=form, image_file=current_user.image_file)
-    else:
-        return render_template('search.html', properties=properties, form=form)
+    return render_template('search.html', properties=properties, form=form, image_file=user_image())
 
 @app.route("/faq")
 def faq():
-    if current_user.is_authenticated:        
-        return render_template('faq.html', image_file=current_user.image_file)
-    else:
-        return render_template('faq.html')
+    return render_template('faq.html', image_file=user_image())
 
 ##### REGISTER
 
@@ -446,11 +446,9 @@ def post(property_id):
             db.session.commit()
     ####
 
-    if current_user.is_authenticated:        
-        return render_template('property.html', title=property.street, property=property, form=form, image_file=current_user.image_file)
-    else:
-        return render_template('property.html', title=property.street, property=property, form=form)
-
+    return render_template('property.html', title=property.street, property=property, form=form, image_file=user_image())
+    
+    
 @app.route("/post/<int:property_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(property_id):
