@@ -1,4 +1,4 @@
-from curses.ascii import isdigit
+# from curses.ascii import isdigit
 import sys
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -70,11 +70,11 @@ def home():
         session['search_data']=search_data
         session['for_data']=for_data
 
-        return redirect(url_for('search', search_data=session["search_data"], for_data=session["for_data"]))
+        return redirect(url_for('search', search_data=session["search_data"], for_data=session["for_data"], image_file=user_image()))
     else:
         app.logger.info('------------------------------------------------------------------------------------------------')
         app.logger.info('HOME - *not* VALIDATED ON SUBMIT')
-        return render_template('home.html', properties=properties, form=form_HomeForm)
+        return render_template('home.html', properties=properties, form=form_HomeForm, image_file=user_image())
 
     
    
@@ -111,12 +111,12 @@ def search():
             # reset values to None so Search link in navbar does not open to same values
             session["search_data"] = None
             session["for_data"] = None
-            return render_template('search.html', properties=properties, form=form)
+            return render_template('search.html', properties=properties, form=form, image_file=user_image())
         # if session["search_data"] does NOT EXIST (navbar Search)
         else:
             form = SearchForm()
             properties = Properties.query.filter(Properties.for_type=="Sale").all()
-            return render_template('search.html', properties=properties, form=form)
+            return render_template('search.html', properties=properties, form=form, image_file=user_image())
 
     ## if submit(POST request) VALID from Search page
     if form.validate_on_submit():
@@ -135,7 +135,7 @@ def search():
         else:
             properties = Properties.query.filter(Properties.zip==searchbar, Properties.for_type==form.fortype.data, Properties.price >= minprice, Properties.price <= maxprice, Properties.gen_property_type == propertytype, Properties.num_bed >= num_bed, Properties.num_bath >= num_bath).all()
         
-        return render_template('search.html', properties=properties, form=form)
+        return render_template('search.html', properties=properties, form=form, image_file=user_image())
 
     ## if submit(POST request) NOT VALID from Search page
     else:
@@ -151,7 +151,7 @@ def search():
         # filter only fortype (Sale)
         properties = Properties.query.filter(Properties.for_type==form.fortype.data).all()
 
-        return render_template('search.html', properties=properties, form=form)
+        return render_template('search.html', properties=properties, form=form, image_file=user_image())
 
 @app.route("/faq")
 def faq():
