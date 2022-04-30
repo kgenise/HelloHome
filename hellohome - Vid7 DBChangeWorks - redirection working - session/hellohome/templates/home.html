@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	<div class="backgroundimage">
+		<div class="container">
+			<h1 class="homebanner_text" style="color: white">Discover your home here</h1>      
+				<!-- START HOMEFORM -->
+				<!-- action empty string : go to same route/post info at same route after posting -->
+				<form method="POST" action="">
+					{{ form.hidden_tag() }}
+					<div class="row homebanner_search">
+						<!-- 1. Searchbar -->
+						<div class="form-group">
+							{% if form.home_searchbar.errors %}
+								{{ form.home_searchbar(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.home_searchbar.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								<!-- Show valid field -->
+								{{ form.home_searchbar(class="form-control form-control-lg filter_searchbar") }}
+							{% endif %}
+							</div>
+						<!-- 2. For Type -->
+						<div class="form-group">
+							{% if form.home_fortype.errors %}
+								{{ form.home_fortype(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.home_fortype.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								<!-- Show valid field -->
+								{{ form.home_fortype(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<!-- 3. Submit Button -->
+						<div class="form-group">
+							{{ form.home_submit(class="btn btn-info mt-1") }}
+						</div>
+					</div>	
+				</form>
+			  	<!-- END HOMEFORM -->
+		</div>
+	</div>
+	
+	{% if properties.count() >= 3 %}
+		<h2 class="mt-4">Top 3 Trending Homes</h2><br>
+		<div class="container-fluid bg-3 text-center"></div>
+			<div class="row">
+				{% for property in properties %}
+					<div class="col-sm-4">
+						<a class="article-title" href="{{ url_for('post', property_id=property.id)}}">
+							<img src="data:image/png;base64,{{property.image}}" width="100%">
+					</a>
+						<div class="topright">{{ property.savers|length }} Saved!</div>
+						<p id="home_type">For {{ property.for_type }}</p>
+						<p id="gen_property_type">{{ property.gen_property_type }}</p>
+						<p id="home_price">${{ property.price }}</p>
+						<p id="home_threes">{{ property.num_bed }} bed &#183; {{ property.num_bath }} bath &#183; {{ property.building_size }} sqft</p>
+						<p id="home_address">{{ property.street }}, {{ property.city }} {{ property.state }} {{ property.zip }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+{% endblock content %}
