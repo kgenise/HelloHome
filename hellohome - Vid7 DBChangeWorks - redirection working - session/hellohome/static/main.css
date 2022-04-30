@@ -1,0 +1,310 @@
+header {
+  background-color: white;
+  border-bottom: #04c4d9 10px solid;
+}
+
+.backgroundimage {
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("bg_home.jpg")
+    ;
+  background-size: cover;
+  height: calc(92vh - 10px);
+}
+
+.homebanner_text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.homebanner_search {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+
+/*   
+h1, h2, h3, h4, h5, h6 {
+  padding-left: 5px;
+}
+
+h1 {
+  color: #ffffff;
+  font-weight: 750;
+  text-align: center;
+}
+
+  h2 {
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    padding: 10px;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-color: #d904c4;
+  }
+
+  /* user/agent portals */
+  h3 {
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    padding: 10px;
+    text-align: left;
+  } */
+
+
+  .container-fluid {
+    border: 1px solid black;
+    padding: 10px;
+  }
+  
+/* Navbar Background */ 
+
+  /* Navbar NORMAL */ 
+  .site-header .navbar-nav .nav-link {
+    color: #000000;
+  }
+
+  /* Navbar HOVER */ 
+  .site-header .navbar-nav .nav-link:hover {
+    color: #000000;
+    border-bottom: 2px solid #c4d904;
+  }
+
+  /* Navbar ACTIVE */ 
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+
+  @media(min-width:992px){
+    .navbar-expand-lg .navbar-collapse{
+      width: 100%;
+    }
+  }
+ 
+  /* Add a gray background color and some padding to the footer */
+  footer {
+    background-color: #04c4d9;
+    padding: 5px;
+  }
+
+  .row.content {
+    height:auto;
+  }
+
+  .col-sm-4 {
+    border: #000000 1px solid;
+    padding: 5px;
+    margin-bottom: 15px;
+  }
+
+  #home_type {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    text-align: left;
+    color: #d91904;
+    padding : 0;
+    margin : 0;
+  }
+
+  
+  #gen_property_type  {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    text-align: left;
+    padding : 0;
+    margin : 0;
+  }
+
+  #home_price {
+    font-family: "Segoe UI";
+    font-size: 22pt;
+    text-align: left;
+    font-weight: bold;
+    padding : 0;
+    margin : 0;
+  }
+
+  #home_threes {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    text-align: left;
+    padding : 0;
+    margin : 0;
+  }
+
+  #home_address {
+    font-family: "Arial";
+    font-size: 10pt;
+    text-align: left;
+    padding : 0;
+    margin : 0;
+  }
+
+
+  label {
+    padding : 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin : 0;
+    font-weight: bold;
+  }
+
+  input {
+    margin-left: 10px;
+  }
+
+  #home_realtycompany {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    text-align: left;
+    padding : 0;
+    margin : 0;
+    text-transform: uppercase;
+  }
+/* 
+  button {
+    border: none;
+    background-color: #ffffff;
+
+  } */
+
+  button {
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  button a {
+    font-family: "Segoe UI";
+    color: white;
+    background-color: #04c4d9;
+    border-radius: 10px;
+    border: none;
+  }
+
+  button a:hover {
+    color: white;
+    font-weight: 15px;
+  }
+
+  .search_btn {
+    padding: 2px;
+  }
+
+  .signin_btn {
+    padding: 15px;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  /* fix the weird home page / signin pg */
+
+
+
+  #agentInfo {
+    display: none;
+  }
+
+  .container {
+    padding-bottom: 10px;
+  }
+
+  /*  */
+
+  .content-section {
+      background: #ffffff;
+      padding: 10px 20px;
+      border: 1px solid #dddddd;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+    
+    .article-title {
+      color: #444444;
+    }
+    
+    a.article-title:hover {
+      color: #428bca;
+      text-decoration: none;
+    }
+    
+    .article-content {
+      white-space: pre-line;
+    }
+    
+    .article-img {
+      height: 65px;
+      width: 65px;
+      margin-right: 16px;
+    }
+    
+    .article-metadata {
+      padding-bottom: 1px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #e3e3e3
+    }
+    
+    .article-metadata a:hover {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .article-svg {
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+    }
+    
+    .account-img {
+      height: 125px;
+      width: 125px;
+      margin-right: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .account-heading {
+      font-size: 2.5rem;
+    }
+
+    .topright {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #D91904;
+      background: WHITE;
+      text-align: center;
+    }
+
+    /* PINK D904C4 */
+    /* BLUE 04c4d9 */
+    /* GREEN C4D904 */
+    /* RED D91904 */
+
+  /* .form-group {
+    border: #000000 1px solid;
+  } */
+
+  .filter_searchbar {
+    width: 96%;
+  }

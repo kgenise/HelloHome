@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="container">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('login') }}>Log In</a>
+            </li>
+            <li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+                <a class="nav-link" href={{ url_for('register') }}>Register</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <!-- action empty string : go to same route/post info at same route after posting -->
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <!-- each field list of errors if field invalid -->
+            <!-- open up conditional & print out errors -->
+            <!-- Bootstrap: (1) add class of isInvalid to field (2) div underneath w/h class of invalid feedback (3) inside error -->
+
+            <!-- form-group bootstrap class -->
+            <fieldset class="form-group">
+                <!-- legend for register form -->
+                <legend class="border-bottom mb-4">Join Today</legend>
+
+                <!-- for groups -->
+
+                <!-- First Name -->
+                <div class="form-group">
+                    {{ form.first_name.label(class="form-control-label") }}
+
+                    {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.first_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                    
+                </div>
+                <!-- Last Name -->
+                <div class="form-group">
+                    {{ form.last_name.label(class="form-control-label") }}
+
+                    {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.last_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                    
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- Show valid field -->
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Is Agent -->
+                <script>
+                    function showHideAgentInfo() {
+           
+                        if(document.getElementById('is_agent').checked) {
+                            // DISPLAY agentFields
+                            document.getElementById('agentInfo').style.display = 'block';
+                            
+                            let password = document.querySelectorAll('.agentInfo_password');
+                            password.forEach(p => {
+                                p.minLength = 10;
+                                p.maxLength = 10;
+                                p.setAttribute('required', '');
+                                p.setAttribute('type', 'tel');
+                                p.setAttribute('pattern', "[0-9]+");
+                            });
+
+                            let realty_company = document.querySelectorAll('.agentInfo_realty_company');
+                            realty_company.forEach(r => {
+                                r.minLength = 2;
+                                r.maxLength = 20;
+                                r.setAttribute('required', '');
+                            });
+                            
+                        } else {
+                            // HIDE agentFields
+                            document.getElementById('agentInfo').style.display = 'none';
+                            
+                            let password = document.querySelectorAll('.agentInfo_password');
+                            password.forEach(p => {
+                                p.value="";
+                                p.removeAttribute('required');
+                            });
+
+                            let realty_company = document.querySelectorAll('.agentInfo_realty_company');
+                            realty_company.forEach(r => {
+                                r.value="";
+                                r.removeAttribute('required');
+                            });
+
+                        }
+                    }
+
+                </script>
+                
+                <input class="form-control form-check-input" id="is_agent" name="is_agent" type="checkbox" onclick="showHideAgentInfo()">
+                <label class="form-check-label" for="is_agent">I am an agent</label>
+                
+                <div id="agentInfo">
+                    <!-- START OF AGENT-SPECIFIC FIELDS -->
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        {{ form.phone_number.label(class="form-control-label") }}
+                        {% if form.phone_number.errors %}
+                            {{ form.phone_number(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.phone_number.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <!-- Show valid field -->
+                            {{ form.phone_number(class="form-control form-control-lg agentInfo_password") }}
+                        {% endif %}
+                    </div>
+                    <small class="text-muted">Note: Phone number must only contain numbers, with length 10.</small>
+                    <!-- Realty Company -->
+                    <div class="form-group">
+                        {{ form.realty_company.label(class="form-control-label") }}
+                        {% if form.realty_company.errors %}
+                            {{ form.realty_company(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.realty_company.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <!-- Show valid field -->
+                            {{ form.realty_company(class="form-control form-control-lg agentInfo_realty_company") }}
+                            {% endif %}
+                    </div>
+                </div>
+                    
+                <!-- END OF AGENT-SPECIFIC FIELDS -->
+            </fieldset>
+            <!-- Submit Button -->
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            
+        </form>
+    </div>
+    <!-- If you already have an account, Sign in here -->
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? 
+            <!-- login = name of function NOT route -->
+            <a class=""ml-2" href="{{ url_for('login') }}">
+                Sign In
+            </a>
+        </small>
+    </div>
+{% endblock content %}
