@@ -1,0 +1,278 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href={{ url_for('manageproperties') }} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Manage Properties
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      
+        <!-- user_landing_mysavedproperties  -->
+        <a class="dropdown-item" href={{ url_for('user_landing_mysavedproperties') }}>user_landing_mysavedproperties</a>
+
+        <!-- user_accountsettings  -->
+        <a class="dropdown-item" href={{ url_for('user_accountsettings') }}>user_accountsettings</a>
+
+        <!-- agent_landing_mypostedproperties -->
+        <a class="dropdown-item" href={{ url_for('agent_landing_mypostedproperties') }}>agent_landing_mypostedproperties</a>
+
+        <!-- agent_postaproperty -->
+        <a class="dropdown-item" href={{ url_for('agent_postaproperty') }}>agent_postaproperty</a>
+
+        <!-- agent_editaproperty -->
+        <a class="dropdown-item" href={{ url_for('agent_editaproperty') }}>agent_editaproperty</a>
+
+        <!-- agent_accountsettings -->
+        <a class="dropdown-item" href={{ url_for('agent_accountsettings') }}>agent_accountsettings</a>
+
+      <!-- SOMETHING ELSE HERE -->
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </li>
+
+
+  ---
+
+  <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+    <a class="navbar-brand" href="#">
+      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo">
+      BootstrapBay
+    </a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-list-4">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Dashboard</a>
+                    <a class="dropdown-item" href="#">Edit Profile</a>
+                    <a class="dropdown-item" href="#">Log Out</a>
+                </div>
+            </li>   
+        </ul>
+    </div>
+
+
+
+
+
+  </nav>
+
+  	<!-- <div class="container">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_landing_mypostedproperties') }}>My Posted Properties</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href={{ url_for('agent_postaproperty') }}>Post a Property</a>
+            </li>
+			<li class="nav-item" style="border-bottom: #d904c4 5px solid;">
+                <a class="nav-link" href={{ url_for('agent_accountsettings') }}>Account Settings</a>
+            </li>
+        </ul>
+    </div> -->
+
+
+    <!-- Edit Property -->
+    <button style="background-color:#04c4d9;color: white !important; border:1px black solid">Edit Property</button> 
+    <!-- Delete Property -->
+    <button style="background-color:#04c4d9;color: white !important; border:1px black solid" data-toggle="modal" data-target="#deleteModal">Delete Property</button> 
+
+
+
+    <!-- Display on Page -->
+<div class="container-fluid bg-3 text-center"> 
+	<div class="row" style="border:1px black solid">
+		<!-- Picture on left -->
+		<div class="col-sm-3"> 
+			<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+			<a data-toggle="modal" data-target="#staticBackdrop">
+				<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+			</a>
+		</div>
+		<!-- Details on right -->
+		<div class="col-sm"> 
+			<p id="home_type">For Sale</p>
+			<p id="home_price">$200,000</p>
+			<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+			<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+			<p id="home_realtycompany">Keller Williams</p>
+		</div>
+	</div>
+</div>
+  
+<!-- Modal -->
+<!-- MODIFY ID TO MATCH IMAGE'S DATA-TARGET FIELD ** -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal CONTENT -->
+	  	<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<!-- MODIFY HEADER -->
+				<h5 class="modal-title" id="staticBackdropLabel">8018 Pine Hill Drive, Tampa FL 33617<h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<div class="container-fluid">
+					<!-- Picture -->
+					<div class="row">
+						<div class="col-md-9 mx-auto">
+							<img src="{{url_for('static', filename='house1.jpg')}}" width="100%">
+						</div>
+					</div>
+					<!-- Main Details + Contact Us -->
+					<div class="row">
+						<div class="col-md-9 ml-auto">
+							<p id="home_type">For Sale</p>
+							<p id="home_price">$200,000</p>
+							<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+							<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+							<p id="home_realtycompany">Keller Williams</p>
+					  	</div>
+					  	<div class="col-md-3 mx-auto">
+							<h5>Contact Us</h5>
+							<button class="signin_btn">
+								<a class="nav-link" href={{ url_for('login') }}>
+									Login In
+								</a>
+							</button>
+					  	</div>
+					</div>
+					<!-- Description -->
+					<div class="row">
+						<div class="col-md ml-auto">
+							<p>Maecenas volutpat, odio eget imperdiet faucibus, dui diam placerat turpis, non semper leo quam fringilla orci. Etiam vitae fringilla leo. Cras mollis ex vel mauris ullamcorper porta. Proin est felis, venenatis sed ex sit amet, luctus dictum tellus. Etiam porttitor, felis facilisis feugiat egestas, mi ipsum varius tortor, vel varius lorem nulla non tortor. Nulla vel ligula vehicula, posuere erat imperdiet, consequat ante. Sed vestibulum, elit non interdum tempor, diam justo venenatis arcu, eget ullamcorper elit ex sed risus. Ut sagittis tincidunt lectus, id tempor felis auctor eu. Donec feugiat vehicula risus ut tristique.</p>
+						</div>
+					</div>
+					<!-- Property Details > General -->
+					<div class="row">
+						<h5>General</h5>
+						<div class="col-md ml-auto">
+							<p>MLS/home ID:</p>
+							<p>Property Type:</p>
+							<p>hellohome Views:</p>
+							<p>Year Built:</p>
+							<p>Lot Desc:</p>
+							<p>Stories:</p>
+							<p>View:</p>
+							<p>HOA:</p>
+						</div>
+					</div>
+					<!-- Property Details > Exterior -->
+					<div class="row">
+						<h5>Exterior</h5>
+						<div class="col-md ml-auto">
+							<p>Roof:</p>
+							<p>Construction Materials:</p>
+							<p>Road Surface Type:</p>
+							<p>Foundation:</p>
+							<p>Fencing:</p>
+							<p>Parking:</p>
+							<p>Pool:</p>
+							<p>Spa:</p>
+							<p>Sprinklers:</p>
+							<p>Sewer:</p>
+						</div>
+					</div>
+					<!-- Property Details > Interior -->
+					<div class="row">
+						<h5>Interior</h5>
+						<div class="col-md ml-auto">
+							<p>Applicances Included:</p>
+							<p>Flooring:</p>
+							<p>Fireplace:</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal Footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+	  </div>
+	</div>
+</div>
+
+
+{% if property in current_user.savedProps %}
+        {{ form.submit(class="btn btn-outline-info saveProperty btn-light") }}
+                            {% else %}
+                                {{ form.submit(class="btn btn-outline-info saveProperty btn-info") }}
+                            {% endif %}
+
+
+
+							<div class="row">
+								<div class="col-sm-4">
+									<a href='#'><img class='listing-img' src="{{url_for('static', filename='house1.jpg')}}" width="100%"></a>
+									<p id="home_type">For Sale</p>
+									<p id="home_price">$200,000</p>
+									<p id="home_threes">3 bed &#183; 3 bath &#183; 1,801 sqft</p>
+									<p id="home_address">8018 Pine Hill Drive, Tampa FL 33617</p>
+								  </div>
+								<div class="col-sm-4"> 
+									<a href='#'><img class='listing-img' src="{{url_for('static', filename='house2.jpg')}}" width="100%"></a>
+									<p id="home_type">For Sale</p>
+									<p id="home_price">$242,000</p>
+									<p id="home_threes">4 bed &#183; 3 bath &#183; 2,508 sqft</p>
+									<p id="home_address">5686 Water Crest Way, Tampa FL 33617</p>
+								  </div>
+								  <div class="col-sm-4"> 
+									<a href='#'><img class='listing-img' src="{{url_for('static', filename='house3.jpg')}}" width="100%"></a>
+									<p id="home_type">For Sale</p>
+									<p id="home_price">$182,000</p>
+									<p id="home_threes">3 bed &#183; 1.5 bath &#183; 1,776 sqft</p>
+									<p id="home_address">7656 Bend Dr, Tampa FL 33617</p>
+								  </div>
+							</div>
+
+
+							.filter_search {
+								width: 30%;
+							}
+						  
+							.filter_fortype {
+							  width: 'fit';
+							}
+						  
+							select {
+							  width: fit-content;
+							  block-size: fit-content;
+							}
+
+
+
+							//console.alert(maxx.options[i].value);
+							//document.querySelector('select[name="maxprice"] option[value="1000000"]').disabled = true;
+
+
+							<!-- START test2 -->
+				<label>Choose an ice cream flavor:
+					<select class="ice-cream" name="ice-cream">
+					  <option value="">Select One …</option>
+					  <option value="chocolate">Chocolate</option>
+					  <option value="sardine">Sardine</option>
+					  <option value="vanilla">Vanilla</option>
+					</select>
+				  </label>
+				  
+				  <div class="result"></div>
+
+				  <script>
+					  const selectElement = document.querySelector('.ice-cream');
+
+						selectElement.addEventListener('change', (event) => {
+						const result = document.querySelector('.result');
+						result.textContent = `You like ${event.target.value}`;
+						});
+				  </script>
+
+				<!-- END test2 -->

@@ -1,0 +1,103 @@
+<!-- START FILTER -->
+<div class="container-fluid">
+
+    <!-- action empty string : go to same route/post info at same route after posting -->
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <!-- each field list of errors if field invalid -->
+        <!-- open up conditional & print out errors -->
+        <!-- Bootstrap: (1) add class of isInvalid to field (2) div underneath w/h class of invalid feedback (3) inside error -->
+
+        <!-- form-group bootstrap class -->
+	
+			<div class="row">	
+				<!-- for groups -->
+	
+				<!-- 1. Searchbar -->
+				<div class="form-group col">
+					{{ form.searchbar.label(class="form-control-label") }}
+					{% if form.searchbar.errors %}
+						{{ form.searchbar(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.searchbar.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<!-- Show valid field -->
+						{{ form.searchbar(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<!-- 2. For Type -->
+				<div class="form-group col">
+					{{ form.fortype.label(class="form-control-label") }}
+					{% if form.fortype.errors %}
+						{{ form.fortype(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.fortype.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<!-- Show valid field -->
+						{{ form.fortype(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<!-- 3. Price -->
+				<div class="form-group col">
+					{{ form.price.label(class="form-control-label") }}
+					{% if form.price.errors %}
+						{{ form.price(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.price.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<!-- Show valid field -->
+						{{ form.price(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<!-- 4. Number of Beds -->
+				<div class="form-group col">
+					{{ form.num_bed.label(class="form-control-label") }}
+					{% if form.num_bed.errors %}
+						{{ form.num_bed(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.num_bed.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<!-- Show valid field -->
+						{{ form.num_bed(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<!-- 5. Number of Baths -->
+				<div class="form-group col">
+					{{ form.num_bath.label(class="form-control-label") }}
+					{% if form.num_bath.errors %}
+						{{ form.num_bath(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.num_bath.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<!-- Show valid field -->
+						{{ form.num_bath(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+
+			
+        <!-- Submit Button -->
+        <div class="form-group col">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+	</div>
+        
+    </form>
+</div>
+<!-- END FILTER -->

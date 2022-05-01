@@ -1,0 +1,16 @@
+<a class="btn" href="#" role="button">BUY</a>
+<a class="btn" href="#" role="button">RENT</a>
+			<form class="searchbar" method="POST">
+				<!-- <input type="text" name="search" class="input_bx" placeholder="Enter a ZIP code"> -->
+				<input type="text" placeholder="Enter a zipcode" style="width: 50%;">
+				<select name="filter" class="categories">
+				  <option value=""selected>Type</option>
+				  <option value="BUY">BUY</option>
+				  <option value="RENT">RENT</option>
+				</select>
+				<button type="submit" name="submit-search" class="search_btn">
+					<a class="nav-link" href={{ url_for('search') }}>
+						Search
+					</a>
+				</button>
+			  </form>
